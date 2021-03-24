@@ -53,13 +53,14 @@ void GSPlay::Init()
 	//Khoi tao map 
 	map = std::make_unique<Map>(1);
 	map->loadMap();
-
+	/*
 	shader = ResourceManagers::GetInstance()->GetShader("Animation");
 	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo_right");
-	std::shared_ptr<SpriteAnimation> obj = std::make_shared<SpriteAnimation>(model, shader, texture, 6, 0.1f);
+	std::shared_ptr<SpriteAnimation2D> obj = std::make_shared<SpriteAnimation2D>(model, shader, texture, 6, 0.1f);
 	obj->Set2DPosition(100, 280);
-	obj->SetSize(52, 52);
+	obj->SetSize(60, 46);
 	m_listSpriteAnimations.push_back(obj);
+	*/
 }
 
 void GSPlay::Exit()
@@ -104,6 +105,7 @@ void GSPlay::Update(float deltaTime)
 	{
 		obj->Update(deltaTime);
 	}
+	map->update(deltaTime);
 }
 
 void GSPlay::Draw()

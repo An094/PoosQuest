@@ -2,7 +2,7 @@
 #include "gamestatebase.h"
 #include "GameButton.h"
 #include "Map.h"
-#include "SpriteAnimation.h"
+#include "SpriteAnimation2D.h"
 
 class Sprite2D;
 class Sprite3D;
@@ -39,7 +39,7 @@ private:
 	std::list<std::shared_ptr<GameButton>>	m_listButton;
 	//khai bao Map
 	std::unique_ptr<Map> map;
-	std::vector < std::shared_ptr<SpriteAnimation>> m_listSpriteAnimations;
+	std::vector < std::shared_ptr<SpriteAnimation2D>> m_listSpriteAnimations;
 
 };
 

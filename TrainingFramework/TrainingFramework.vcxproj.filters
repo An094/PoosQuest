@@ -69,16 +69,16 @@
     <ClCompile Include="src\GameObject\GameButton.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameStates\Map.cpp">
-      <Filter>TrainingFramework\src\GameStates</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameStates\GSSetting.cpp">
       <Filter>TrainingFramework\src\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="src\GameStates\GSCredit.cpp">
       <Filter>TrainingFramework\src\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObject\SpriteAnimation.cpp">
+    <ClCompile Include="src\GameObject\Map.cpp">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject\SpriteAnimation2D.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,16 +140,16 @@
     <ClInclude Include="src\GameObject\GameButton.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameStates\Map.h">
-      <Filter>TrainingFramework\src\GameStates</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameStates\GSSetting.h">
       <Filter>TrainingFramework\src\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="src\GameStates\GSCredit.h">
       <Filter>TrainingFramework\src\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObject\SpriteAnimation.h">
+    <ClInclude Include="src\GameObject\Map.h">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject\SpriteAnimation2D.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

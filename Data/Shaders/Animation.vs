@@ -2,8 +2,8 @@ attribute 	vec3 	a_posL;
 attribute 	vec2 	a_uv;
 
 uniform 	mat4 	u_matMVP;
-uniform 	mat4 	u_matWorld;
-uniform 	float 	u_alpha;
+//uniform 	mat4 	u_matWorld;
+//uniform 	float 	u_alpha;
 uniform		float		u_currentFrame;
 uniform		float		u_numFrames;
 
