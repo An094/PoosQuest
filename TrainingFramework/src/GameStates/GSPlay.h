@@ -3,6 +3,7 @@
 #include "GameButton.h"
 #include "Map.h"
 #include "SpriteAnimation2D.h"
+#include "Enemy0.h"
 
 class Sprite2D;
 class Sprite3D;
@@ -40,6 +41,8 @@ private:
 	//khai bao Map
 	std::unique_ptr<Map> map;
 	std::vector < std::shared_ptr<SpriteAnimation2D>> m_listSpriteAnimations;
+
+	std::list<std::shared_ptr<Enemy0>> m_listEnemy;
 
 };
 

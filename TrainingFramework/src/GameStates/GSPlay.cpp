@@ -61,6 +61,24 @@ void GSPlay::Init()
 	obj->SetSize(60, 46);
 	m_listSpriteAnimations.push_back(obj);
 	*/
+	
+	for (auto it : map->m_listEnemyData) {
+		switch (it->type)
+		{
+		case 0: 
+		{
+			printf("vao switch\n");
+			auto enemy = std::make_shared<Enemy0>(it->cEnemy.x, it->cEnemy.y, it->dir, it->move, it->maxMove, it->speed);
+			enemy->loadImage();
+			m_listEnemy.push_back(enemy);
+			break;
+		}
+			
+		default:
+			break;
+		}
+	}
+
 }
 
 void GSPlay::Exit()
@@ -106,6 +124,10 @@ void GSPlay::Update(float deltaTime)
 		obj->Update(deltaTime);
 	}
 	map->update(deltaTime);
+	for (auto it : m_listEnemy)
+	{
+		it->update(deltaTime);
+	}
 }
 
 void GSPlay::Draw()
@@ -121,6 +143,10 @@ void GSPlay::Draw()
 	for (auto obj : m_listSpriteAnimations)
 	{
 		obj->Draw();
+	}
+	for (auto it : m_listEnemy)
+	{
+		it->draw();
 	}
 }
 

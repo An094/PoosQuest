@@ -81,6 +81,12 @@
     <ClCompile Include="src\GameObject\SpriteAnimation2D.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObject\Enemy.cpp">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject\Enemy0.cpp">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -150,6 +156,12 @@
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObject\SpriteAnimation2D.h">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject\Enemy.h">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject\Enemy0.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

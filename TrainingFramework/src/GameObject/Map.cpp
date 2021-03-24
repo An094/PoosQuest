@@ -1,5 +1,6 @@
 ﻿#include "Map.h"
 #include <iostream>
+#include "Enemy0.h"
 
 Map::Map(int level = 1) {
 	m_level = level;
@@ -61,12 +62,15 @@ void Map::loadMap() {
     poo.cDest.y = readFile[index++];
     numEnemy = readFile[index++];
     for (int i = 0; i < numEnemy; i++) {
-        enemyData[i].type = readFile[index++];
-        enemyData[i].cEnemy.x = readFile[index++];
-        enemyData[i].dir = readFile[index++];
-        enemyData[i].move = readFile[index++];
-        enemyData[i].maxMove = readFile[index++];
-        enemyData[i].speed = readFile[index++];
+        std::shared_ptr<EnemyData> en = std::make_shared<EnemyData>();
+        en->type = readFile[index++];
+        en->cEnemy.x = readFile[index++];
+        en->cEnemy.y = readFile[index++];
+        en->dir = readFile[index++];
+        en->move = readFile[index++];
+        en->maxMove = readFile[index++];
+        en->speed = readFile[index++];
+        m_listEnemyData.push_back(en);
     }
     shader = ResourceManagers::GetInstance()->GetShader("Animation");
     auto texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo_right");
