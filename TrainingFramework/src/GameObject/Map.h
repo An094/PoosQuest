@@ -1,6 +1,6 @@
 #pragma once
 #include "GameStates/GameStatebase.h"
-class Enemy0;
+
 
 #define MAX_X 30
 #define MAX_Y 30
@@ -39,7 +39,6 @@ public:
 	void draw();
 	void update(float);
 
-//private:
 	TileMap** m_map;
 	int m_level;
 	int maxX;

@@ -22,8 +22,8 @@
   ftxf86.c
   ftlcdfil.c
   ftgxval.c
-  ftotval.c
   ftpatent.c
+  ftotval.c
   pcf.c
   pfr.c
   psaux.c
