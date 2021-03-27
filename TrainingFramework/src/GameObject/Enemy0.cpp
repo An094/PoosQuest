@@ -56,7 +56,7 @@ void Enemy0::move(float deltaTime)
 			oldYPos = currentYPos;
 			currentMove = 0;
 			setDir(2);
-			loadImage();
+			enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_down"));
 		}
 		break;
 	}
@@ -72,7 +72,7 @@ void Enemy0::move(float deltaTime)
 			oldXPos = currentXPos;
 			currentMove = 0;
 			setDir(3);
-			loadImage();
+			enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_left"));
 		}
 		break;
 	}
@@ -88,7 +88,7 @@ void Enemy0::move(float deltaTime)
 			oldYPos = currentYPos;
 			currentMove = 0;
 			setDir(0);
-			loadImage();
+			enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_up"));
 		}
 		break;
 	}
@@ -104,7 +104,7 @@ void Enemy0::move(float deltaTime)
 			oldXPos = currentXPos;
 			currentMove = 0;
 			setDir(1);
-			loadImage();
+			enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_right"));
 		}
 		break;
 	}
