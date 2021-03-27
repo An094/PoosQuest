@@ -8,3 +8,7 @@ Enemy::Enemy(int type, int x, int y, int dir, int move, int maxMove, int speed) 
 	enemy.maxMove = maxMove;
 	enemy.speed = speed;
 }
+Enemy::~Enemy()
+{
+
+}

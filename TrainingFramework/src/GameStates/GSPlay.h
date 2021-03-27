@@ -5,6 +5,7 @@
 #include "SpriteAnimation2D.h"
 #include "Enemy0.h"
 #include "Enemy.h"
+#include "Poo.h"
 
 class Sprite2D;
 class Sprite3D;
@@ -41,9 +42,8 @@ private:
 	std::list<std::shared_ptr<GameButton>>	m_listButton;
 	//khai bao Map
 	std::unique_ptr<Map> map;
-	std::vector < std::shared_ptr<SpriteAnimation2D>> m_listSpriteAnimations;
-
+	std::list<std::shared_ptr<SpriteAnimation2D>> m_listSpriteAnimations;
 	std::list<std::shared_ptr<Enemy>> m_listEnemy;
-
+	std::shared_ptr<Poo> m_poo;
 };
 

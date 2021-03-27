@@ -11,9 +11,8 @@ public:
 	void draw();
 
 private:
-	std::list<std::shared_ptr<SpriteAnimation2D>> m_listEnemy;
-	float totalDest;
-	float des;
+	float maxMoveDis;
+	float currentMove;
 	float currentCoorX;
 	float currentCoorY;
 	float currentXPos;

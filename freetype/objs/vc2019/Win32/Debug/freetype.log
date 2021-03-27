@@ -7,8 +7,8 @@
   ftfstype.c
   ftgasp.c
   ftglyph.c
-  ftgzip.c
   ftinit.c
+  ftgzip.c
   ftlzw.c
   ftstroke.c
   ftsystem.c
@@ -22,8 +22,8 @@
   ftxf86.c
   ftlcdfil.c
   ftgxval.c
-  ftpatent.c
   ftotval.c
+  ftpatent.c
   pcf.c
   pfr.c
   psaux.c

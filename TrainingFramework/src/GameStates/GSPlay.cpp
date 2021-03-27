@@ -45,23 +45,22 @@ void GSPlay::Init()
 
 
 	//text game title
+	
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd");
 	m_score = std::make_shared< Text>(shader, font, "score: 10", TEXT_COLOR::RED, 1.0);
 	m_score->Set2DPosition(Vector2(screenWidth/2, 100));
+	
 
 	//Khoi tao map 
-	map = std::make_unique<Map>(1);
+	map = std::make_unique<Map>(2);
 	map->loadMap();
-	/*
-	shader = ResourceManagers::GetInstance()->GetShader("Animation");
-	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo_right");
-	std::shared_ptr<SpriteAnimation2D> obj = std::make_shared<SpriteAnimation2D>(model, shader, texture, 6, 0.1f);
-	obj->Set2DPosition(100, 280);
-	obj->SetSize(60, 46);
-	m_listSpriteAnimations.push_back(obj);
-	*/
+
+	//Khoi tao Poo
+	m_poo = std::make_shared<Poo>(map->poo.dir, map->poo.cStart.x, map->poo.cStart.y, map->poo.cDest.x, map->poo.cDest.y);
+	m_poo->loadImage();
 	
+	//Khoi tao Enemy
 	for (auto it : map->m_listEnemyData) {
 		switch (it->type)
 		{
@@ -78,6 +77,20 @@ void GSPlay::Init()
 			break;
 		}
 	}
+	//Khoi tao gold
+
+	auto modelGold = ResourceManagers::GetInstance()->GetModel("Sprite2D");
+	auto shaderGold = ResourceManagers::GetInstance()->GetShader("Animation");
+	auto textureGold = ResourceManagers::GetInstance()->GetTexture("gold");
+	for (auto it : map->m_listGold) {
+		auto gold = std::make_shared<SpriteAnimation2D>(modelGold, shaderGold, textureGold, 8, 0.1f);
+		gold->SetSize(20, 30);
+		float x = it->x * TILESIZE + TILESIZE / 2 + 50;
+		float y = it->y * TILESIZE + TILESIZE / 2 + 140;
+		gold->Set2DPosition(x, y);
+		m_listSpriteAnimations.push_back(gold);
+	}
+
 
 }
 
@@ -119,15 +132,17 @@ void GSPlay::HandleTouchEvents(int x, int y, bool bIsPressed)
 
 void GSPlay::Update(float deltaTime)
 {
+
+	map->update(deltaTime);
 	for (auto obj : m_listSpriteAnimations)
 	{
 		obj->Update(deltaTime);
 	}
-	map->update(deltaTime);
 	for (auto it : m_listEnemy)
 	{
 		it->update(deltaTime);
 	}
+	m_poo->update(deltaTime);
 }
 
 void GSPlay::Draw()
@@ -140,6 +155,7 @@ void GSPlay::Draw()
 	}
 
 	map->draw();
+	m_poo->draw();
 	for (auto obj : m_listSpriteAnimations)
 	{
 		obj->Draw();

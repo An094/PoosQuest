@@ -72,12 +72,15 @@ void Map::loadMap() {
         en->speed = readFile[index++];
         m_listEnemyData.push_back(en);
     }
-    shader = ResourceManagers::GetInstance()->GetShader("Animation");
-    auto texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo_right");
-    std::shared_ptr<SpriteAnimation2D> obj = std::make_shared<SpriteAnimation2D>(model, shader, texture, 6, 0.1f);
-    obj->Set2DPosition(poo.cStart.x*TILESIZE+TILESIZE/2+50, poo.cStart.y * TILESIZE + TILESIZE / 2 + 140);
-    obj->SetSize(60, 46);
-    m_listSpriteAnimation.push_back(obj);
+   
+    numGold = readFile[index++];
+    for (int i = 0; i < numGold; i++) {
+        std::shared_ptr<Coord> g = std::make_shared<Coord>();
+        g->x = readFile[index++];
+        g->y = readFile[index++];
+        m_listGold.push_back(g);
+    }
+
 }
 
 void Map::draw() 
@@ -86,14 +89,7 @@ void Map::draw()
     {
         it->Draw();
     }
-    for (auto it : m_listSpriteAnimation)
-    {
-        it->Draw();
-    }
 }
-void Map::update(float deltaTime) {
-    for (auto obj : m_listSpriteAnimation)
-    {
-        obj->Update(deltaTime);
-    }
+void Map::update(float deltaTime) 
+{
 }

@@ -6,7 +6,7 @@ private:
 	EnemyData enemy;
 public:
 	Enemy(int, int, int, int, int, int, int);
-	//virtual ~Enemy();
+	virtual ~Enemy();
 	virtual void loadImage() = 0;
 	virtual void move(float) = 0;
 	virtual void update(float) = 0;

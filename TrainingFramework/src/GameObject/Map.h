@@ -23,7 +23,7 @@ typedef struct EnemyData {
 	int maxMove;
 	int speed;
 };
-typedef struct Poo {
+typedef struct PooData {
 	Coord cStart;
 	Coord cDest;
 	int dir;
@@ -40,14 +40,15 @@ public:
 	void update(float);
 
 	TileMap** m_map;
+
 	int m_level;
 	int maxX;
 	int maxY;
-	std::list<std::shared_ptr<Sprite2D>>	m_listTileMap;
-	std::list<std::shared_ptr<SpriteAnimation2D>> m_listSpriteAnimation;
-	Poo poo;
+	PooData poo;
 	int numEnemy;
-	//EnemyData enemyData[10];
+	int numGold;
+	std::list<std::shared_ptr<Coord>> m_listGold;
+	std::list<std::shared_ptr<Sprite2D>>	m_listTileMap;
 	std::vector<std::shared_ptr<EnemyData>> m_listEnemyData;
 };
 
