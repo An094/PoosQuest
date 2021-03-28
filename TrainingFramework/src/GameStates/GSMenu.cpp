@@ -20,7 +20,7 @@ GSMenu::~GSMenu()
 void GSMenu::Init()
 {
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
-	auto texture = ResourceManagers::GetInstance()->GetTexture("bg_main_menu");
+	auto texture = ResourceManagers::GetInstance()->GetTexture("background");
 
 	//BackGround
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
@@ -30,14 +30,14 @@ void GSMenu::Init()
 	//logo
 	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\Logo");
 	m_Logo = std::make_shared<Sprite2D>(model, shader, texture);
-	m_Logo->Set2DPosition(screenWidth / 2, 100);
-	m_Logo->SetSize(360, 180);
+	m_Logo->Set2DPosition(oldXPos, oldYPos);
+	m_Logo->SetSize(300, 150);
 
 
 	//play button
 	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\button_play");
 	std::shared_ptr<GameButton> buttonPlay = std::make_shared<GameButton>(model, shader, texture);
-	buttonPlay->Set2DPosition(screenWidth / 2, 300);
+	buttonPlay->Set2DPosition(screenWidth / 2, 370);
 	buttonPlay->SetSize(250, 100);
 	buttonPlay->SetOnClick([]() {
 		GameStateMachine::GetInstance()->ChangeState(StateTypes::STATE_Play);
@@ -88,6 +88,30 @@ void GSMenu::Init()
 	//m_Text_gameName->Set2DPosition(Vector2(screenWidth / 2 - 80, 120));
 	
 }
+void GSMenu::dynamicLogo(float deltaTime)
+{
+	if (currentMove <= maxMove)
+	{
+		if (state == 0)
+		{
+			currentMove += speed * deltaTime;
+			currentYPos = oldYPos - currentMove;
+			m_Logo->Set2DPosition(currentXPos, currentYPos);
+		}
+		else
+		{
+			currentMove += speed * deltaTime;
+			currentYPos = oldYPos + currentMove;
+			m_Logo->Set2DPosition(currentXPos, currentYPos);
+		}
+	}
+	else
+	{
+		state = 1 - state;
+		currentMove -= maxMove;
+		oldYPos = currentYPos;
+	}
+}
 
 void GSMenu::Exit()
 {
@@ -133,6 +157,7 @@ void GSMenu::Update(float deltaTime)
 		it->Update(deltaTime);
 	}
 	m_Logo->Update(deltaTime);
+	dynamicLogo(deltaTime);
 }
 
 void GSMenu::Draw()
