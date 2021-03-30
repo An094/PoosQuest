@@ -53,11 +53,11 @@ void GSPlay::Init()
 	
 
 	//Khoi tao map 
-	map = std::make_unique<Map>(2);
+	map = std::make_shared<Map>(2);
 	map->loadMap();
 
 	//Khoi tao Poo
-	m_poo = std::make_shared<Poo>(map->poo.dir, map->poo.cStart.x, map->poo.cStart.y, map->poo.cDest.x, map->poo.cDest.y);
+	m_poo = std::make_shared<Poo>(map->poo.dir, map->poo.cStart.x, map->poo.cStart.y, map->poo.cDest.x, map->poo.cDest.y, map);
 	m_poo->loadImage();
 	
 	//Khoi tao Enemy
@@ -90,7 +90,7 @@ void GSPlay::Init()
 		gold->Set2DPosition(x, y);
 		m_listSpriteAnimations.push_back(gold);
 	}
-
+	ResourceManagers::GetInstance()->PlaySound("test.mp3");
 
 }
 
@@ -118,7 +118,7 @@ void GSPlay::HandleEvents()
 
 void GSPlay::HandleKeyEvents(int key, bool bIsPressed)
 {
-	
+	m_poo->handleKeyEvents(key, bIsPressed);
 }
 
 void GSPlay::HandleTouchEvents(int x, int y, bool bIsPressed)
@@ -138,11 +138,13 @@ void GSPlay::Update(float deltaTime)
 	{
 		obj->Update(deltaTime);
 	}
+	m_poo->update(deltaTime);
 	for (auto it : m_listEnemy)
 	{
 		it->update(deltaTime);
+		m_poo->checkColli(it);
 	}
-	m_poo->update(deltaTime);
+	
 }
 
 void GSPlay::Draw()
@@ -155,7 +157,7 @@ void GSPlay::Draw()
 	}
 
 	map->draw();
-	m_poo->draw();
+	
 	for (auto obj : m_listSpriteAnimations)
 	{
 		obj->Draw();
@@ -164,6 +166,7 @@ void GSPlay::Draw()
 	{
 		it->draw();
 	}
+	m_poo->draw();
 }
 
 void GSPlay::SetNewPostionForBullet()

@@ -115,8 +115,6 @@ D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(13,2): warning C4
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(17,2): warning C4091: 'typedef ': ignored on left of 'Coord' when no variable is declared
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(25,2): warning C4091: 'typedef ': ignored on left of 'EnemyData' when no variable is declared
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(30,2): warning C4091: 'typedef ': ignored on left of 'PooData' when no variable is declared
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo.cpp(9,55): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo.cpp(10,55): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Enemy.cpp
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(13,2): warning C4091: 'typedef ': ignored on left of 'TileMap' when no variable is declared
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(17,2): warning C4091: 'typedef ': ignored on left of 'Coord' when no variable is declared
@@ -127,13 +125,14 @@ D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(13,2): warning C4
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(17,2): warning C4091: 'typedef ': ignored on left of 'Coord' when no variable is declared
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(25,2): warning C4091: 'typedef ': ignored on left of 'EnemyData' when no variable is declared
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.h(30,2): warning C4091: 'typedef ': ignored on left of 'PooData' when no variable is declared
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(54,95): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(54,61): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(23,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(25,15): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(35,13): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(62,95): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(62,61): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(29,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(31,15): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map.cpp(41,13): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   GameButton.cpp
   Generating Code...
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo.cpp(147): warning C4715: 'Poo::checkColli': not all control paths return a value
   Compiling...
   Font.cpp
   Enemy0.cpp
@@ -148,4 +147,5 @@ D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Enemy0.cpp(7,17): warni
   Application.cpp
   Generating Code...
 Application.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+LINK : warning LNK4098: defaultlib 'LIBCMTD' conflicts with use of other libs; use /NODEFAULTLIB:library
   TrainingFramework.vcxproj -> D:\20202\ThucTap\MyGame\BIN-Nvidia\TrainingFramework.exe

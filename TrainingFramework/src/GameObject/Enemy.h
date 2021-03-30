@@ -11,6 +11,7 @@ public:
 	virtual void move(float) = 0;
 	virtual void update(float) = 0;
 	virtual void draw() = 0;
+	virtual Vector2 getPos() = 0;
 	int getDir() { return enemy.dir; }
 	int getCoorX() { return enemy.cEnemy.x; }
 	int getCoorY() { return enemy.cEnemy.y; }

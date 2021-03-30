@@ -4,14 +4,20 @@
 
 Map::Map(int level = 1) {
 	m_level = level;
-    m_map = new TileMap * [MAX_X];
+    m_map = new TileMap * [MAX_Y];
     for (int i = 0; i < MAX_X; i++)
-        m_map[i] = new TileMap[MAX_Y];
+        m_map[i] = new TileMap[MAX_X];
+    map_convert = new int* [MAX_Y];
+    for (int i = 0; i < MAX_X; i++)
+        map_convert[i] = new int[MAX_Y];
 }
 Map::~Map() {
-    for (int i = 0; i < MAX_X; i++)
+    for (int i = 0; i < MAX_Y; i++)
         delete[] m_map[i];
     delete[] m_map;
+    for (int i = 0; i < MAX_Y; i++)
+        delete[] map_convert[i];
+    delete[] map_convert;
 }
 
 void Map::loadMap() {
@@ -49,12 +55,15 @@ void Map::loadMap() {
             m_map[i][j].indexY = i;
             m_map[i][j].type = readFile[index++];
             sprintf_s(nameTileMap, "Tile\\%02d", m_map[i][j].type);
+            if (m_map[i][j].type == -1) map_convert[i][j] = 0;
+            else map_convert[i][j] = map[m_map[i][j].type];
             auto texture = ResourceManagers::GetInstance()->GetTexture(std::string(nameTileMap));
             std::shared_ptr<Sprite2D> tile = std::make_shared<Sprite2D>(model, shader, texture);
             tile->Set2DPosition(j * TILESIZE + TILESIZE / 2 + 50, i * TILESIZE + TILESIZE / 2 + 150);
             tile->SetSize(TILESIZE, TILESIZE);
             m_listTileMap.push_back(tile);
         }
+        
     poo.cStart.x = readFile[index++];
     poo.cStart.y = readFile[index++];
     poo.dir = readFile[index++];

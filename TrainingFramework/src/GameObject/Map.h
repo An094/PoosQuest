@@ -40,7 +40,8 @@ public:
 	void update(float);
 
 	TileMap** m_map;
-
+	int map[40] = { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0 };
+	int** map_convert;
 	int m_level;
 	int maxX;
 	int maxY;

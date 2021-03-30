@@ -9,6 +9,7 @@ public:
 	void move(float);
 	void update(float);
 	void draw();
+	Vector2 getPos();
 
 private:
 	float maxMoveDis;

@@ -41,7 +41,7 @@ private:
 	std::shared_ptr<Text>  m_score;
 	std::list<std::shared_ptr<GameButton>>	m_listButton;
 	//khai bao Map
-	std::unique_ptr<Map> map;
+	std::shared_ptr<Map> map;
 	std::list<std::shared_ptr<SpriteAnimation2D>> m_listSpriteAnimations;
 	std::list<std::shared_ptr<Enemy>> m_listEnemy;
 	std::shared_ptr<Poo> m_poo;

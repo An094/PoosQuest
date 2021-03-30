@@ -24,8 +24,8 @@
   ftgxval.c
   ftotval.c
   ftpatent.c
-  pfr.c
   pcf.c
+  pfr.c
   psaux.c
   pshinter.c
   psmodule.c

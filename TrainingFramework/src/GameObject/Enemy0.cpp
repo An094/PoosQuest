@@ -112,6 +112,10 @@ void Enemy0::move(float deltaTime)
 		break;
 	}
 }
+Vector2 Enemy0::getPos()
+{
+	return Vector2(currentXPos, currentYPos);
+}
 void Enemy0::draw()
 {
 	enemy->Draw();
