@@ -54,10 +54,23 @@ void Poo::move(float deltaTime)
 {
 	if (isAlive)
 	{
-		if (MOVE == VK_UP) moveUp(deltaTime);
-		else if (MOVE == VK_DOWN) moveDown(deltaTime);
-		else if (MOVE == VK_LEFT) moveLeft(deltaTime);
-		else if (MOVE == VK_RIGHT) moveRight(deltaTime);
+		switch (MOVE)
+		{
+		case KEY_UP:
+			moveUp(deltaTime);
+			break;
+		case KEY_DOWN:
+			moveDown(deltaTime);
+			break;
+		case KEY_RIGHT:
+			moveRight(deltaTime);
+			break;
+		case KEY_LEFT:
+			moveLeft(deltaTime);
+			break;
+		default:
+			break;
+		}
 		
 	}
 }
