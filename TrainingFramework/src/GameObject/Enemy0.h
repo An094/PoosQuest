@@ -3,23 +3,22 @@
 
 class Enemy0 : public Enemy {
 public:
-	Enemy0(int x, int y, int dir, int move, int maxMove, int speed);
+	Enemy0(int x, int y, int dir, int move, int maxMove, int speed, std::shared_ptr<Map2> map);
 	~Enemy0();
-	void loadImage();
-	void move(float);
-	void update(float);
-	void draw();
-	Vector2 getPos();
+	void Move(float);
+	void Update(float);
+	void Draw();
+	void MoveWithPoo(float x, float y);
+	Vector2 getPos() { return enemy->Get2DPosition(); }
 
 private:
+	float speed = 100.0f;
 	float maxMoveDis;
 	float currentMove;
-	float currentCoorX;
-	float currentCoorY;
-	float currentXPos;
-	float currentYPos;
-	float oldXPos;
-	float oldYPos;
+	Vector2 currentPos;
+	Vector2 oldPos;
+	std::shared_ptr<Map2> m_map;
 	std::shared_ptr<SpriteAnimation2D> enemy;
+	std::vector<std::shared_ptr<SpriteAnimation2D>> vPoseE;
 	
 };

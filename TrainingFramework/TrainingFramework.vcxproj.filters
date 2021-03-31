@@ -75,9 +75,6 @@
     <ClCompile Include="src\GameStates\GSCredit.cpp">
       <Filter>TrainingFramework\src\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObject\Map.cpp">
-      <Filter>TrainingFramework\src\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObject\SpriteAnimation2D.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
@@ -87,7 +84,16 @@
     <ClCompile Include="src\GameObject\Enemy0.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObject\Poo.cpp">
+    <ClCompile Include="src\GameObject\DynamicObject.cpp">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject\Gold.cpp">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject\Map2.cpp">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject\Poo2.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,9 +161,6 @@
     <ClInclude Include="src\GameStates\GSCredit.h">
       <Filter>TrainingFramework\src\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObject\Map.h">
-      <Filter>TrainingFramework\src\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObject\SpriteAnimation2D.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
@@ -167,7 +170,16 @@
     <ClInclude Include="src\GameObject\Enemy0.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameObject\Poo.h">
+    <ClInclude Include="src\GameObject\DynamicObject.h">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject\Gold.h">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject\Map2.h">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject\Poo2.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

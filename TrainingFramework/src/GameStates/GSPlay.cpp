@@ -32,7 +32,7 @@ void GSPlay::Init()
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
 	m_BackGround = std::make_shared<Sprite2D>(model, shader, texture);
 	m_BackGround->Set2DPosition(screenWidth / 2, screenHeight / 2);
-	m_BackGround->SetSize(screenWidth, screenHeight);
+	m_BackGround->SetSize(screenWidth*3, screenHeight*3);
 
 	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\back_play");
 	std::shared_ptr<GameButton> button = std::make_shared<GameButton>(model, shader, texture);
@@ -50,25 +50,26 @@ void GSPlay::Init()
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd");
 	m_score = std::make_shared< Text>(shader, font, "score: 10", TEXT_COLOR::RED, 1.0);
 	m_score->Set2DPosition(Vector2(screenWidth/2, 100));
+
+	
+	//myMap = std::make_shared<Map2>(2);
+	//Khoi tao map 
+	//map = std::make_shared<Map>(2);
+	//map->loadMap();
+	map2 = std::make_shared<Map2>(2);
+
 	
 
-	//Khoi tao map 
-	map = std::make_shared<Map>(2);
-	map->loadMap();
-
-	//Khoi tao Poo
-	m_poo = std::make_shared<Poo>(map->poo.dir, map->poo.cStart.x, map->poo.cStart.y, map->poo.cDest.x, map->poo.cDest.y, map);
-	m_poo->loadImage();
+	
 	
 	//Khoi tao Enemy
-	for (auto it : map->m_listEnemyData) {
+	for (auto it : map2->getListEnemyData()) {
 		switch (it->type)
 		{
 		case 0: 
 		{
 			printf("vao switch\n");
-			auto enemy = std::make_shared<Enemy0>(it->cEnemy.x, it->cEnemy.y, it->dir, it->move, it->maxMove, it->speed);
-			enemy->loadImage();
+			auto enemy = std::make_shared<Enemy0>(it->cEnemy.x, it->cEnemy.y, it->dir, it->move, it->maxMove1, it->speed, map2);
 			m_listEnemy.push_back(enemy);
 			break;
 		}
@@ -77,19 +78,15 @@ void GSPlay::Init()
 			break;
 		}
 	}
+	for (auto it : map2->getGold()) {
+		auto gold = std::make_shared<Gold>(it->x, it->y, map2);
+		m_listGold.push_back(gold);
+	}
+	//Khoi tao Poo
+	m_poo2 = std::make_shared<Poo2>(map2->getPoo().dir, map2->getPoo().cDest.x, map2->getPoo().cDest.y, map2,m_listEnemy,m_listGold);
 	//Khoi tao gold
 
-	auto modelGold = ResourceManagers::GetInstance()->GetModel("Sprite2D");
-	auto shaderGold = ResourceManagers::GetInstance()->GetShader("Animation");
-	auto textureGold = ResourceManagers::GetInstance()->GetTexture("gold");
-	for (auto it : map->m_listGold) {
-		auto gold = std::make_shared<SpriteAnimation2D>(modelGold, shaderGold, textureGold, 8, 0.1f);
-		gold->SetSize(20, 30);
-		float x = it->x * TILESIZE + TILESIZE / 2 + 50;
-		float y = it->y * TILESIZE + TILESIZE / 2 + 140;
-		gold->Set2DPosition(x, y);
-		m_listSpriteAnimations.push_back(gold);
-	}
+	
 	ResourceManagers::GetInstance()->PlaySound("test.mp3");
 
 }
@@ -118,7 +115,7 @@ void GSPlay::HandleEvents()
 
 void GSPlay::HandleKeyEvents(int key, bool bIsPressed)
 {
-	m_poo->handleKeyEvents(key, bIsPressed);
+	m_poo2->HandleKeyEvents(key, bIsPressed);
 }
 
 void GSPlay::HandleTouchEvents(int x, int y, bool bIsPressed)
@@ -132,19 +129,17 @@ void GSPlay::HandleTouchEvents(int x, int y, bool bIsPressed)
 
 void GSPlay::Update(float deltaTime)
 {
-
-	map->update(deltaTime);
-	for (auto obj : m_listSpriteAnimations)
+	for (auto obj : m_listGold)
 	{
 		obj->Update(deltaTime);
 	}
-	m_poo->update(deltaTime);
 	for (auto it : m_listEnemy)
 	{
-		it->update(deltaTime);
-		m_poo->checkColli(it);
+		it->Update(deltaTime);
+		//m_poo->checkColli(it);
 	}
-	
+	m_poo2->Update(deltaTime);
+
 }
 
 void GSPlay::Draw()
@@ -155,18 +150,18 @@ void GSPlay::Draw()
 	{
 		it->Draw();
 	}
-
-	map->draw();
+	map2->DrawMap();
 	
-	for (auto obj : m_listSpriteAnimations)
+	
+	for (auto obj : m_listGold)
 	{
 		obj->Draw();
 	}
 	for (auto it : m_listEnemy)
 	{
-		it->draw();
+		it->Draw();
 	}
-	m_poo->draw();
+	m_poo2->Draw();
 }
 
 void GSPlay::SetNewPostionForBullet()

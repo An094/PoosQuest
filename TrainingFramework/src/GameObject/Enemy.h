@@ -1,21 +1,22 @@
 #pragma once
 #include "GameStates/GameStatebase.h"
-#include "Map.h"
-class Enemy {
+#include "DynamicObject.h"
+#include "Map2.h"
+class Enemy : DynamicObject	{
 private:
-	EnemyData enemy;
+	//EnemyData enemy;
+	int m_dir;
+	int m_type;
+	sCoor coor;
+	std::shared_ptr<Map2> m_map;
 public:
-	Enemy(int, int, int, int, int, int, int);
+	Enemy(int type, int x, int y, int dir);
 	virtual ~Enemy();
-	virtual void loadImage() = 0;
-	virtual void move(float) = 0;
-	virtual void update(float) = 0;
-	virtual void draw() = 0;
+	virtual void Move(float) = 0;
+	virtual void Update(float) = 0;
+	virtual void Draw() = 0;
+	virtual void MoveWithPoo(float, float) = 0;
 	virtual Vector2 getPos() = 0;
-	int getDir() { return enemy.dir; }
-	int getCoorX() { return enemy.cEnemy.x; }
-	int getCoorY() { return enemy.cEnemy.y; }
-	int getMaxMove() { return enemy.maxMove; }
-	int getSpeed() { return enemy.speed; }
-	void setDir(int dir) { enemy.dir = dir; }
+	int getDir() { return m_dir; }
+	void setDir(int dir) { m_dir = dir; }
 };

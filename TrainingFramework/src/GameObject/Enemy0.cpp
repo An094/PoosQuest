@@ -1,110 +1,113 @@
 #include "Enemy0.h"
-Enemy0::Enemy0(int x, int y, int dir, int move, int maxMove, int speed)
-	: Enemy(0, x, y, dir, move, maxMove, speed)
+Enemy0::Enemy0(int x, int y, int dir, int move, int maxMove, int speed, std::shared_ptr<Map2> map)
+	: Enemy(0,x,y,dir)
 {
 	maxMoveDis = maxMove * TILESIZE;
-	currentCoorX = x;
-	currentCoorY = y;
-	oldXPos = currentCoorX * TILESIZE + TILESIZE / 2 + 50;
-	oldYPos = currentCoorY * TILESIZE + TILESIZE / 2 + 140;
-	currentYPos = oldYPos;
-	currentXPos = oldXPos;
 	currentMove = 0;
+
+
+	
+	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
+	auto shader = ResourceManagers::GetInstance()->GetShader("Animation");
+	auto texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_up");
+	auto tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 8, 0.1f);
+	tempSprite->SetSize(40, 44);
+	vPoseE.push_back(tempSprite);//index 0
+
+	texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_right");
+	tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 8, 0.1f);
+	tempSprite->SetSize(40, 44);
+	vPoseE.push_back(tempSprite);//index 1
+
+	texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_down");
+	tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 8, 0.1f);
+	tempSprite->SetSize(40, 44);
+	vPoseE.push_back(tempSprite);//index 2
+
+	texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_left");
+	tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 8, 0.1f);
+	tempSprite->SetSize(40, 44);
+	vPoseE.push_back(tempSprite);//index 3
+
+
+	sPoo poo = map->getPoo();
+	int xPos = (x - poo.cStart.x) * TILESIZE + screenWidth / 2;
+	int yPos = (y - poo.cStart.y) * TILESIZE + screenHeight / 2;
+	oldPos.x = xPos;
+	oldPos.y = yPos;
+	currentPos = oldPos;
+	enemy = vPoseE[getDir()];
+	enemy->Set2DPosition(xPos, yPos);
 }
 Enemy0::~Enemy0()
 {
 
 }
-void Enemy0::loadImage()
-{
-	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
-    auto shader = ResourceManagers::GetInstance()->GetShader("Animation");
-	std::shared_ptr<Texture> texture;
-	switch (getDir())
-	{
-	case 0:
-		texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_up");
-		break;
-	case 1:
-		texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_right");
-		break;
-	case 2:
-		texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_down");
-		break;
-	case 3:
-		texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_left");
-		break;
-	default:
-		break;
-	}
-    enemy = std::make_shared<SpriteAnimation2D>(model, shader, texture, 8, 0.1f);
-    enemy->SetSize(40, 44);
-}
-void Enemy0::move(float deltaTime)
+void Enemy0::Move(float deltaTime)
 {
 	switch (getDir())
 	{
 	case 0:
 	{
 		if (currentMove <= maxMoveDis) {
-			currentMove += 100.0f * deltaTime;
-			currentYPos = oldYPos - currentMove;
-			enemy->Set2DPosition(currentXPos,currentYPos);
+			currentMove += speed * deltaTime;
+			currentPos.y = oldPos.y - currentMove;
+			enemy->Set2DPosition(currentPos.x,currentPos.y);
 		}
 		else
 		{
-			oldYPos = currentYPos;
+			oldPos = currentPos;
 			currentMove = 0;
 			setDir(2);
-			enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_down"));
+			enemy = vPoseE[2];
 		}
 		break;
 	}
 	case 1:
 	{
 		if (currentMove <= maxMoveDis) {
-			currentMove += 100.0f * deltaTime;
-			currentXPos = oldXPos + currentMove;
-			enemy->Set2DPosition(currentXPos, currentYPos);
+			currentMove += speed * deltaTime;
+			currentPos.x = oldPos.x + currentMove;
+			enemy->Set2DPosition(currentPos.x, currentPos.y);
 		}
 		else
 		{
-			oldXPos = currentXPos;
+			oldPos = currentPos;
 			currentMove = 0;
 			setDir(3);
-			enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_left"));
+			enemy = vPoseE[3];
 		}
 		break;
 	}
 	case 2:
 	{
 		if (currentMove <= maxMoveDis) {
-			currentMove += 100.0f * deltaTime;
-			currentYPos = oldYPos + currentMove;
-			enemy->Set2DPosition(currentXPos,currentYPos);
+			currentMove += speed * deltaTime;
+			currentPos.y = oldPos.y + currentMove;
+			enemy->Set2DPosition(currentPos.x, currentPos.y);
 		}
 		else
 		{
-			oldYPos = currentYPos;
+			oldPos = currentPos;
 			currentMove = 0;
 			setDir(0);
-			enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_up"));
+			enemy = vPoseE[0];
 		}
 		break;
 	}
 	case 3:
 	{
 		if (currentMove <= maxMoveDis) {
-			currentMove += 100.0f * deltaTime;
-			currentXPos = oldXPos - currentMove;
-			enemy->Set2DPosition(currentXPos, currentYPos);
+			currentMove += speed * deltaTime;
+			currentPos.x = oldPos.x - currentMove;
+			enemy->Set2DPosition(currentPos.x, currentPos.y);
 		}
 		else
 		{
-			oldXPos = currentXPos;
+			oldPos = currentPos;
 			currentMove = 0;
 			setDir(1);
-			enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_right"));
+			enemy = vPoseE[1];
 		}
 		break;
 	}
@@ -112,17 +115,18 @@ void Enemy0::move(float deltaTime)
 		break;
 	}
 }
-Vector2 Enemy0::getPos()
+void Enemy0::MoveWithPoo(float x, float y)
 {
-	return Vector2(currentXPos, currentYPos);
+	Vector2 pos = getPos();
+	enemy->Set2DPosition(pos.x + x, pos.y + y);
 }
-void Enemy0::draw()
+void Enemy0::Draw()
 {
 	enemy->Draw();
 }
-void Enemy0::update(float deltaTime)
+void Enemy0::Update(float deltaTime)
 {
 	
 	enemy->Update(deltaTime);
-	move(deltaTime);
+	//Move(deltaTime);
 }
