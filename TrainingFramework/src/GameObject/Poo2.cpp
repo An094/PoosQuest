@@ -60,59 +60,85 @@ void Poo2::HandleKeyEvents(int key, bool bIsPressed)
 void Poo2::MoveUp(float deltaTime)
 {
 	//std::cout << "x: " << getCoorPoo().x << "y: " << getCoorPoo().y << std::endl;
+	Vector2 upMove(0.0f, 1.0f);
 	setDir(0);
 	m_poo = vPose[0];
-	myMap->MoveMap(0.0f, 5.0f);
+	myMap->MoveMap(0.0f, speed * deltaTime);
 	for (auto it : m_listEnemy)
 	{
-		(it)->MoveWithPoo(0.0f, 5.0f);
+		//(it)->MoveWithPoo(0.0f, 5.0f);
+		//(it)->Move(deltaTime, 0.0f, speed * deltaTime);
+		(it)->MoveDirWithPoo(deltaTime, upMove);
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(0.0f, 5.0f);
+		(it)->MoveWithPoo(0.0f, speed * deltaTime);
 	}
 }
 void Poo2::MoveDown(float deltaTime)
 {
+	Vector2 downMove(0.0f, -1.0f);
 	setDir(2);
 	m_poo = vPose[2];
-	myMap->MoveMap(0.0f, -5.0f);
+	myMap->MoveMap(0.0f, -1 * speed * deltaTime);
 	for (auto it : m_listEnemy)
 	{
-		(it)->MoveWithPoo(0.0f, -5.0f);
+		//(it)->MoveWithPoo(0.0f, -1 * speed * deltaTime);
+		//(it)->Move(deltaTime, 0.0f,-1 * speed * deltaTime);
+		(it)->MoveDirWithPoo(deltaTime, downMove);
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(0.0f, -5.0f);
+		(it)->MoveWithPoo(0.0f, -1 * speed * deltaTime);
 	}
 }
 void Poo2::MoveRight(float deltaTime)
 {
+	Vector2 rightMove(-1.0f, 0.0f);
 	setDir(1);
 	m_poo = vPose[1];
-	myMap->MoveMap(-5.0f, 0.0f);
+	myMap->MoveMap(-1 * speed * deltaTime, 0.0f);
 	for (auto it : m_listEnemy)
 	{
-		(it)->MoveWithPoo(-5.0f, 0.0f);
+		//(it)->MoveWithPoo(-5.0f, 0.0f);
+		//(it)->Move(deltaTime, -1 * speed * deltaTime, 0.0f);
+		(it)->MoveDirWithPoo(deltaTime, rightMove);
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(-5.0f, 0.0f);
+		(it)->MoveWithPoo(-1 * speed * deltaTime, 0.0f);
 	}
 }
 void Poo2::MoveLeft(float deltaTime)
 {
+	Vector2 leftMove(1.0f, 0.0f);
 	setDir(3);
 	m_poo = vPose[3];
-	myMap->MoveMap(5.0f, 0.0f);
+	myMap->MoveMap(speed * deltaTime, 0.0f);
 	
 	for (auto it : m_listEnemy)
 	{
-		(it)->MoveWithPoo(5.0f, 0.0f);
+		//(it)->MoveWithPoo(speed * deltaTime, 0.0f);
+		//(it)->Move(deltaTime, speed * deltaTime, 0.0f);
+		(it)->MoveDirWithPoo(deltaTime, leftMove);
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(5.0f, 0.0f);
+		(it)->MoveWithPoo(speed * deltaTime, 0.0f);
+	}
+}
+void Poo2::AutoMove(float deltaTime)
+{
+	for (auto it : m_listEnemy)
+	{
+		(it)->MoveDirWithPoo(deltaTime);
+	}
+}
+void Poo2::MoveDir(Vector2 vector, float deltaTime)
+{
+	for (auto it : m_listEnemy)
+	{
+		(it)->MoveDirWithPoo(deltaTime, vector);
 	}
 }
 /*
@@ -157,31 +183,49 @@ void Poo2::Move(float deltaTime)
 				&& (mapconvert[top][left] != 8) && (mapconvert[top][right] != 8)
 				&& (mapconvert[top][left] != -1) && (mapconvert[top][right] != -1))
 				MoveUp(deltaTime);
+			else AutoMove(deltaTime);
 			break;
 		}
 			
 		case KEY_DOWN:
+		{
 			if ((mapconvert[bottom][left] != 3) && (mapconvert[bottom][right] != 3)
 				&& (mapconvert[bottom][left] != 6) && (mapconvert[bottom][right] != 6)
 				&& (mapconvert[bottom][left] != 7) && (mapconvert[bottom][right] != 7)
-				&& (mapconvert[bottom][left] != -1) && (mapconvert[bottom][right] != -1)) 
+				&& (mapconvert[bottom][left] != -1) && (mapconvert[bottom][right] != -1))
 				MoveDown(deltaTime);
+			else AutoMove(deltaTime);
+
 			break;
+		}
+			
 		case KEY_RIGHT:
-			if ((mapconvert[top][right] != 2)&&(mapconvert[bottom][right] != 2)
+		{
+			if ((mapconvert[top][right] != 2) && (mapconvert[bottom][right] != 2)
 				&& (mapconvert[top][right] != 5) && (mapconvert[bottom][right] != 5)
 				&& (mapconvert[top][right] != 6) && (mapconvert[bottom][right] != 6)
-				&& (mapconvert[top][right] != -1) && (mapconvert[bottom][right] != -1)) 
+				&& (mapconvert[top][right] != -1) && (mapconvert[bottom][right] != -1))
 				MoveRight(deltaTime);
+			else AutoMove(deltaTime);
+
 			break;
+		}
+			
 		case KEY_LEFT:
+		{
 			if ((mapconvert[top][left] != 4) && (mapconvert[bottom][left] != 4)
 				&& (mapconvert[top][left] != 8) && (mapconvert[bottom][left] != 8)
 				&& (mapconvert[top][left] != 7) && (mapconvert[bottom][left] != 7)
-				&& (mapconvert[top][left] != -1) && (mapconvert[bottom][left] != -1)) 
+				&& (mapconvert[top][left] != -1) && (mapconvert[bottom][left] != -1))
 				MoveLeft(deltaTime);
+			else AutoMove(deltaTime);
 			break;
+		}
+			
 		default:
+		{
+			AutoMove(deltaTime);
+		}
 			break;
 		}
 

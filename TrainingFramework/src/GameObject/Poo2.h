@@ -29,6 +29,8 @@ public:
 	void MoveRight(float);
 	void MoveDown(float);
 	void MoveLeft(float);
+	void MoveDir(Vector2,float);
+	void AutoMove(float);
 	void Update(float);
 	void HandleKeyEvents(int, bool);
 	void Draw();

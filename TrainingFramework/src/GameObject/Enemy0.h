@@ -5,10 +5,11 @@ class Enemy0 : public Enemy {
 public:
 	Enemy0(int x, int y, int dir, int move, int maxMove, int speed, std::shared_ptr<Map2> map);
 	~Enemy0();
-	void Move(float);
+	void Move(float deltaTime, float xPoo, float yPoo);
 	void Update(float);
 	void Draw();
 	void MoveWithPoo(float x, float y);
+	void MoveDirWithPoo(float, Vector2);
 	Vector2 getPos() { return enemy->Get2DPosition(); }
 
 private:
@@ -18,7 +19,5 @@ private:
 	Vector2 currentPos;
 	Vector2 oldPos;
 	std::shared_ptr<Map2> m_map;
-	std::shared_ptr<SpriteAnimation2D> enemy;
-	std::vector<std::shared_ptr<SpriteAnimation2D>> vPoseE;
-	
+	std::shared_ptr<SpriteAnimation2D> enemy;	
 };
