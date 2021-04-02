@@ -5,7 +5,7 @@ Enemy0::Enemy0(int x, int y, int dir, int move, int maxMove, int speed, std::sha
 	maxMoveDis = maxMove * TILESIZE;
 	currentMove = 0;
 
-
+	defaultDir = dir;
 	
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
 	auto shader = ResourceManagers::GetInstance()->GetShader("Animation");
@@ -41,6 +41,7 @@ Enemy0::Enemy0(int x, int y, int dir, int move, int maxMove, int speed, std::sha
 	int yPos = (y - poo.cStart.y) * TILESIZE + screenHeight / 2;
 	oldPos.x = xPos;
 	oldPos.y = yPos;
+	defaultPos = Vector2(xPos, yPos);
 	currentPos = oldPos;
 	enemy = std::make_shared<SpriteAnimation2D>(model, shader, texture, 8, 0.1f);
 	enemy->SetSize(40, 44);
@@ -206,6 +207,37 @@ void Enemy0::MoveDirWithPoo(float deltaTime, Vector2 vector)
 			break;
 		}
 		currentMove = 0;
+	}
+}
+void Enemy0::BackDefault()
+{
+	enemy->Set2DPosition(defaultPos);
+	currentMove = 0;
+	setDir(defaultDir);
+	switch (defaultDir)
+	{
+	case 0:
+	{
+		enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_up"));
+		break;
+	}
+	case 1:
+	{
+		enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_right"));
+		break;
+	}
+	case 2:
+	{
+		enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_down"));
+		break;
+	}
+	case 3:
+	{
+		enemy->SetTexture(ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy0_left"));
+		break;
+	}
+	default:
+		break;
 	}
 }
 void Enemy0::Draw()

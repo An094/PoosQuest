@@ -5,6 +5,7 @@
 Poo2::Poo2(int dir, int xEnd, int yEnd,std::shared_ptr<Map2> map, std::list<std::shared_ptr<Enemy>> listEnemy, std::list<std::shared_ptr<Gold>> listGold) :DynamicObject()
 {
 	isAlive = true;
+	defaultDir = dir;
 	myMap = map;
 	mapconvert = map->getMapConvert();
 	m_listEnemy = listEnemy;
@@ -34,12 +35,17 @@ Poo2::Poo2(int dir, int xEnd, int yEnd,std::shared_ptr<Map2> map, std::list<std:
 	tempSprite->SetSize(60, 46);
 	vPose.push_back(tempSprite);//index 3
 
+	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo_dead");
+	tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 6, 0.1f);
+	tempSprite->SetSize(60, 46);
+	vPose.push_back(tempSprite);//index 4
+
 	m_poo = vPose[getDir()];
 	m_poo->Set2DPosition(screenWidth/2, screenHeight/2);
 }
 Poo2::~Poo2()
 {
-
+	m_poo.~shared_ptr();
 }
 
 sCoor Poo2::getCoorPoo()
@@ -60,10 +66,10 @@ void Poo2::HandleKeyEvents(int key, bool bIsPressed)
 void Poo2::MoveUp(float deltaTime)
 {
 	//std::cout << "x: " << getCoorPoo().x << "y: " << getCoorPoo().y << std::endl;
-	Vector2 upMove(0.0f, 1.0f);
+	Vector2 upMove(0.0f, 1.25f);
 	setDir(0);
 	m_poo = vPose[0];
-	myMap->MoveMap(0.0f, speed * deltaTime);
+	myMap->MoveMap(0.0f, 1.25f *speed * deltaTime);
 	for (auto it : m_listEnemy)
 	{
 		//(it)->MoveWithPoo(0.0f, 5.0f);
@@ -72,15 +78,15 @@ void Poo2::MoveUp(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(0.0f, speed * deltaTime);
+		(it)->MoveWithPoo(0.0f,1.25f * speed * deltaTime);
 	}
 }
 void Poo2::MoveDown(float deltaTime)
 {
-	Vector2 downMove(0.0f, -1.0f);
+	Vector2 downMove(0.0f, -1.25f);
 	setDir(2);
 	m_poo = vPose[2];
-	myMap->MoveMap(0.0f, -1 * speed * deltaTime);
+	myMap->MoveMap(0.0f, -1.25 * speed * deltaTime);
 	for (auto it : m_listEnemy)
 	{
 		//(it)->MoveWithPoo(0.0f, -1 * speed * deltaTime);
@@ -89,15 +95,15 @@ void Poo2::MoveDown(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(0.0f, -1 * speed * deltaTime);
+		(it)->MoveWithPoo(0.0f, -1.25f * speed * deltaTime);
 	}
 }
 void Poo2::MoveRight(float deltaTime)
 {
-	Vector2 rightMove(-1.0f, 0.0f);
+	Vector2 rightMove(-1.25f, 0.0f);
 	setDir(1);
 	m_poo = vPose[1];
-	myMap->MoveMap(-1 * speed * deltaTime, 0.0f);
+	myMap->MoveMap(-1.25f * speed * deltaTime, 0.0f);
 	for (auto it : m_listEnemy)
 	{
 		//(it)->MoveWithPoo(-5.0f, 0.0f);
@@ -106,15 +112,15 @@ void Poo2::MoveRight(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(-1 * speed * deltaTime, 0.0f);
+		(it)->MoveWithPoo(-1.25f * speed * deltaTime, 0.0f);
 	}
 }
 void Poo2::MoveLeft(float deltaTime)
 {
-	Vector2 leftMove(1.0f, 0.0f);
+	Vector2 leftMove(1.25f, 0.0f);
 	setDir(3);
 	m_poo = vPose[3];
-	myMap->MoveMap(speed * deltaTime, 0.0f);
+	myMap->MoveMap(1.25f *speed * deltaTime, 0.0f);
 	
 	for (auto it : m_listEnemy)
 	{
@@ -124,7 +130,7 @@ void Poo2::MoveLeft(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(speed * deltaTime, 0.0f);
+		(it)->MoveWithPoo(1.25f *speed * deltaTime, 0.0f);
 	}
 }
 void Poo2::AutoMove(float deltaTime)
@@ -141,21 +147,25 @@ void Poo2::MoveDir(Vector2 vector, float deltaTime)
 		(it)->MoveDirWithPoo(deltaTime, vector);
 	}
 }
-/*
-bool Poo2::checkColli(std::shared_ptr<Enemy> enemy)
+
+bool Poo2::CheckCollision()
 {
-	Vector2 coorEnemy = enemy->getPos();
-	float distX = currentXPos - coorEnemy.x;
-	distX = distX > 0 ? distX : (-distX);
-	float distY = currentYPos - coorEnemy.y;
-	distY = distY > 0 ? distY : (-distY);
-	if (distX < 15.0f && distY < 15.0f)
+	for (auto it : m_listEnemy)
 	{
-		std::cout << "game_over";
-		return false;
+		Vector2 posEnemy = it->getPos();
+		float distX = screenWidth/2 - posEnemy.x;
+		float distY = screenHeight/2 - posEnemy.y;
+		distX = distX > 0 ? distX : (-distX);
+		distY = distY > 0 ? distY : (-distY);
+		if (distX < 15.0f && distY < 15.0f)
+		{
+			m_poo = vPose[4];
+
+			return true;
+		}
 	}
+	return false;
 }
-*/
 void Poo2::Draw()
 {
 	m_poo->Draw();
@@ -232,8 +242,13 @@ void Poo2::Move(float deltaTime)
 	}
 
 }
+void Poo2::BackDefault()
+{
+	m_poo = vPose[defaultDir];
+}
 void Poo2::Update(float deltaTime)
 {
 	m_poo->Update(deltaTime);
 	Move(deltaTime);
+	//CheckCollision();
 }

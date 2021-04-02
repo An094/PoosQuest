@@ -34,6 +34,7 @@ private:
 	int numGold;
 	int maxX, maxY;
 	std::vector<std::shared_ptr<Sprite2D>> m_listTileMap;
+	std::vector<Vector2> defaultPos;
 	std::list<std::shared_ptr<sEnemyData>> m_listEnemy;
 	std::list<std::shared_ptr<sCoor>> m_Gold;
 
@@ -45,6 +46,8 @@ public:
 	//void readFile();
 	void DrawMap();
 	void MoveMap(float x, float y);
+	void BackDefault();
+	std::vector<Vector2> getDefaultPos() { return defaultPos; }
 	sPoo getPoo() { return struPoo; }
 	std::list<std::shared_ptr<sEnemyData>> getListEnemyData() { return m_listEnemy; }
 	std::list<std::shared_ptr<sCoor>> getGold(){ return m_Gold; }

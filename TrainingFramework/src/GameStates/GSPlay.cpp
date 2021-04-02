@@ -8,6 +8,7 @@
 #include "Sprite2D.h"
 #include "Sprite3D.h"
 #include "Text.h"
+#include "Application.h"
 
 extern int screenWidth; //need get on Graphic engine
 extern int screenHeight; //need get on Graphic engine
@@ -25,6 +26,8 @@ GSPlay::~GSPlay()
 
 void GSPlay::Init()
 {
+	m_time = 0.0f;
+	isLost = false;
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
 	auto texture = ResourceManagers::GetInstance()->GetTexture("Tile\\-1");
 
@@ -45,22 +48,15 @@ void GSPlay::Init()
 
 
 	//text game title
-	
+	/*
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd");
 	m_score = std::make_shared< Text>(shader, font, "score: 10", TEXT_COLOR::RED, 1.0);
 	m_score->Set2DPosition(Vector2(screenWidth/2, 100));
+	*/
 
-	
-	//myMap = std::make_shared<Map2>(2);
-	//Khoi tao map 
-	//map = std::make_shared<Map>(2);
-	//map->loadMap();
 	map2 = std::make_shared<Map2>(2);
 
-	
-
-	
 	
 	//Khoi tao Enemy
 	for (auto it : map2->getListEnemyData()) {
@@ -84,8 +80,6 @@ void GSPlay::Init()
 	}
 	//Khoi tao Poo
 	m_poo2 = std::make_shared<Poo2>(map2->getPoo().dir, map2->getPoo().cDest.x, map2->getPoo().cDest.y, map2,m_listEnemy,m_listGold);
-	//Khoi tao gold
-
 	
 	ResourceManagers::GetInstance()->PlaySound("test.mp3");
 
@@ -93,7 +87,7 @@ void GSPlay::Init()
 
 void GSPlay::Exit()
 {
-
+	//GameStateMachine::GetInstance()->PopState();
 }
 
 
@@ -129,6 +123,18 @@ void GSPlay::HandleTouchEvents(int x, int y, bool bIsPressed)
 
 void GSPlay::Update(float deltaTime)
 {
+	if (isLost)
+	{
+		m_poo2->MOVE = 0;
+		m_time += deltaTime;
+		if (m_time >= 0.6f)
+		{
+			m_time = 0.0f;
+			isLost = false;
+			Reset();
+			
+		}
+	}
 	for (auto obj : m_listGold)
 	{
 		obj->Update(deltaTime);
@@ -136,16 +142,18 @@ void GSPlay::Update(float deltaTime)
 	for (auto it : m_listEnemy)
 	{
 		it->Update(deltaTime);
-		//m_poo->checkColli(it);
 	}
 	m_poo2->Update(deltaTime);
+	if (m_poo2->CheckCollision())
+	{
+		isLost = true;	
+	}
 
 }
 
 void GSPlay::Draw()
 {
 	m_BackGround->Draw();
-	m_score->Draw();
 	for (auto it : m_listButton)
 	{
 		it->Draw();
@@ -166,4 +174,32 @@ void GSPlay::Draw()
 
 void GSPlay::SetNewPostionForBullet()
 {
+}
+void GSPlay::Reset()
+{
+	/*
+	m_poo2.~shared_ptr();
+	map2.~shared_ptr();
+	for (auto it : m_listEnemy)
+	{
+		it.~shared_ptr();
+	}
+	m_listEnemy.clear();
+	for (auto it : m_listGold)
+	{
+		it.~shared_ptr();
+	}
+	m_listGold.clear();
+	Init();
+	*/
+	map2->BackDefault();
+	for (auto it : m_listEnemy)
+	{
+		(it)->BackDefault();
+	}
+	for (auto it : m_listGold)
+	{
+		(it)->BackDefault();
+	}
+	m_poo2->BackDefault();
 }

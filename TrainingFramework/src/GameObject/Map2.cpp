@@ -98,6 +98,8 @@ Map2::Map2(int level)
             distY = (i - struPoo.cStart.y)*TILESIZE + screenHeight/2;
             distX = (j - struPoo.cStart.x)*TILESIZE + screenWidth/2;
             m_listTileMap[i * maxX + j]->Set2DPosition(distX, distY);
+            Vector2 dfPos(distX, distY);
+            defaultPos.push_back(dfPos);
         }
 
     for (int i = 0; i < maxY; i++)
@@ -130,5 +132,12 @@ void Map2::MoveMap(float x, float y)
         {
             Vector2 currentPos = m_listTileMap[i * maxX + j]->Get2DPosition();
             m_listTileMap[i * maxX + j]->Set2DPosition(currentPos.x + x, currentPos.y + y);
+        }
+}
+void Map2::BackDefault()
+{
+    for (int i = 0; i < maxY; i++)
+        for (int j = 0; j < maxX; j++) {
+            m_listTileMap[i * maxX + j]->Set2DPosition(defaultPos[i * maxX + j]);
         }
 }

@@ -9,6 +9,7 @@ Gold::Gold(int x, int y, std::shared_ptr<Map2> map)
 	sPoo poo = map->getPoo();
 	int xPos = (x - poo.cStart.x) * TILESIZE + screenWidth / 2;
 	int yPos = (y - poo.cStart.y) * TILESIZE + screenHeight / 2;
+	defaultPos = Vector2(xPos, yPos);
 	m_Gold->SetSize(20, 30);
 	m_Gold->Set2DPosition(xPos, yPos);
 }
@@ -20,6 +21,10 @@ void Gold::MoveWithPoo(float x, float y)
 {
 	Vector2 pos = getPos();
 	m_Gold->Set2DPosition(pos.x + x, pos.y + y);
+}
+void Gold::BackDefault()
+{
+	m_Gold->Set2DPosition(defaultPos);
 }
 void Gold::Draw()
 {

@@ -1,9 +1,10 @@
 #include "Application.h"
 #include "GameStates/GameStateMachine.h"
 #include "GameStates/GameStatebase.h"
+#include "GameStates/GSPlay.h"
+
 extern GLint screenWidth;
 extern GLint screenHeight;
-
 
 Application::Application()
 {

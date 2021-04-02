@@ -10,14 +10,17 @@ public:
 	void Draw();
 	void MoveWithPoo(float x, float y);
 	void MoveDirWithPoo(float, Vector2);
+	void BackDefault();
 	Vector2 getPos() { return enemy->Get2DPosition(); }
 
 private:
-	float speed = 100.0f;
+	float speed = 120.0f;
 	float maxMoveDis;
 	float currentMove;
+	int defaultDir;
 	Vector2 currentPos;
 	Vector2 oldPos;
+	Vector2 defaultPos;
 	std::shared_ptr<Map2> m_map;
 	std::shared_ptr<SpriteAnimation2D> enemy;	
 };

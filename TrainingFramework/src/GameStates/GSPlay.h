@@ -25,6 +25,7 @@ public:
 
 	void Pause();
 	void Resume();
+	void Reset();
 
 	void HandleEvents();
 	void HandleKeyEvents(int key, bool bIsPressed);
@@ -35,11 +36,12 @@ public:
 
 	
 	void SetNewPostionForBullet();
-
 private:
 
 	std::shared_ptr<Sprite2D> m_BackGround;
-	std::shared_ptr<Text>  m_score;
+	bool isLost;
+	float m_time;
+	
 	std::list<std::shared_ptr<GameButton>>	m_listButton;
 	//khai bao Map
 	std::shared_ptr<Map2> map2;

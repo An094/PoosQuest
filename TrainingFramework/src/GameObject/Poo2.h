@@ -18,8 +18,8 @@ private:
 	Vector2 dest;
 	float xColl = 14.0f;
 	float yColl = 8.0f;
-	float speed = 100.0f;
-	int MOVE;
+	float speed = 120.0f;
+	int defaultDir;
 public:
 	Poo2(int dir,int xEnd, int yEnd,std::shared_ptr<Map2> map, std::list<std::shared_ptr<Enemy>> listEnemy,std::list<std::shared_ptr<Gold>> listGold);
 	~Poo2();
@@ -34,8 +34,9 @@ public:
 	void Update(float);
 	void HandleKeyEvents(int, bool);
 	void Draw();
-	void CheckCollision();
+	bool CheckCollision();
+	void BackDefault();
 	Vector2 getPos() { return m_poo->Get2DPosition(); }
 	sCoor getCoorPoo();
-
+	int MOVE;
 };
