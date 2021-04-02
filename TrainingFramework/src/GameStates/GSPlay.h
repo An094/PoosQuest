@@ -7,6 +7,7 @@
 #include "Poo2.h"
 #include "Map2.h"
 #include "Gold.h"
+#include "GamePlay.h"
 
 class Sprite2D;
 class Sprite3D;
@@ -21,6 +22,7 @@ public:
 	~GSPlay();
 
 	void Init();
+	void InitLevel(int);
 	void Exit();
 
 	void Pause();
@@ -37,8 +39,10 @@ public:
 	
 	void SetNewPostionForBullet();
 private:
-
+	std::shared_ptr<GamePlay> m_GamePlay;
 	std::shared_ptr<Sprite2D> m_BackGround;
+	int m_level;
+	bool isWin;
 	bool isStart;
 	bool isLost;
 	int RemGold;

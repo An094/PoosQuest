@@ -26,6 +26,15 @@ GSPlay::~GSPlay()
 
 void GSPlay::Init()
 {
+	m_level = 1;
+	//InitLevel(1);
+	m_GamePlay = std::make_shared<GamePlay>(1);
+	
+	ResourceManagers::GetInstance()->PlaySound("test.mp3");
+
+}
+void GSPlay::InitLevel(int level)
+{
 	m_time = 0.0f;
 	isStart = true;
 	isLost = false;
@@ -36,7 +45,7 @@ void GSPlay::Init()
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
 	m_BackGround = std::make_shared<Sprite2D>(model, shader, texture);
 	m_BackGround->Set2DPosition(screenWidth / 2, screenHeight / 2);
-	m_BackGround->SetSize(screenWidth*3, screenHeight*3);
+	m_BackGround->SetSize(screenWidth * 3, screenHeight * 3);
 
 	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\back_play");
 	std::shared_ptr<GameButton> button = std::make_shared<GameButton>(model, shader, texture);
@@ -47,30 +56,21 @@ void GSPlay::Init()
 		});
 	m_listButton.push_back(button);
 
+	map2 = std::make_shared<Map2>(level);
 
-	//text game title
-	/*
-	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
-	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd");
-	m_score = std::make_shared< Text>(shader, font, "score: 10", TEXT_COLOR::RED, 1.0);
-	m_score->Set2DPosition(Vector2(screenWidth/2, 100));
-	*/
 
-	map2 = std::make_shared<Map2>(2);
-
-	
 	//Khoi tao Enemy
 	for (auto it : map2->getListEnemyData()) {
 		switch (it->type)
 		{
-		case 0: 
+		case 0:
 		{
 			printf("vao switch\n");
 			auto enemy = std::make_shared<Enemy0>(it->cEnemy.x, it->cEnemy.y, it->dir, it->move, it->maxMove1, it->speed, map2);
 			m_listEnemy.push_back(enemy);
 			break;
 		}
-			
+
 		default:
 			break;
 		}
@@ -81,15 +81,12 @@ void GSPlay::Init()
 	}
 	RemGold = m_listGold.size();
 	//Khoi tao Poo
-	m_poo2 = std::make_shared<Poo2>(map2->getPoo().dir, map2->getPoo().cDest.x, map2->getPoo().cDest.y, map2,m_listEnemy,m_listGold);
-	
-	ResourceManagers::GetInstance()->PlaySound("test.mp3");
-
+	m_poo2 = std::make_shared<Poo2>(map2->getPoo().dir, map2->getPoo().cDest.x, map2->getPoo().cDest.y, map2, m_listEnemy, m_listGold);
 }
 
 void GSPlay::Exit()
 {
-	//GameStateMachine::GetInstance()->PopState();
+
 }
 
 
@@ -108,7 +105,7 @@ void GSPlay::HandleEvents()
 {
 
 }
-
+/*
 void GSPlay::HandleKeyEvents(int key, bool bIsPressed)
 {
 	m_poo2->HandleKeyEvents(key, bIsPressed);
@@ -161,7 +158,9 @@ void GSPlay::Update(float deltaTime)
 	}
 	if ((RemGold == 0) && (m_poo2->CheckEndPoint()))
 	{
-		std::cout << "WIN\n";
+		std::cout << "WIN";
+		m_level++;
+		//InitLevel(m_level);
 	}
 }
 
@@ -191,21 +190,6 @@ void GSPlay::SetNewPostionForBullet()
 }
 void GSPlay::Reset()
 {
-	/*
-	m_poo2.~shared_ptr();
-	map2.~shared_ptr();
-	for (auto it : m_listEnemy)
-	{
-		it.~shared_ptr();
-	}
-	m_listEnemy.clear();
-	for (auto it : m_listGold)
-	{
-		it.~shared_ptr();
-	}
-	m_listGold.clear();
-	Init();
-	*/
 	map2->BackDefault();
 	for (auto it : m_listEnemy)
 	{
@@ -216,4 +200,28 @@ void GSPlay::Reset()
 		(it)->BackDefault();
 	}
 	m_poo2->BackDefault();
+}
+*/
+
+void GSPlay::HandleKeyEvents(int key, bool bIsPressed)
+{
+	m_GamePlay->HandleKeyEvents(key, bIsPressed);
+}
+
+void GSPlay::HandleTouchEvents(int x, int y, bool bIsPressed)
+{
+	m_GamePlay->HandleTouchEvents(x, y, bIsPressed);
+}
+void GSPlay::Update(float deltaTime)
+{
+	m_GamePlay->Update(deltaTime);
+	if (m_GamePlay->isWin)
+	{
+		m_level++;
+		m_GamePlay = std::make_shared<GamePlay>(m_level);
+	}
+}
+void GSPlay::Draw()
+{
+	m_GamePlay->Draw();
 }

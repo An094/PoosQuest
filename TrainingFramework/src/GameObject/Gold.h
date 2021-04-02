@@ -8,6 +8,7 @@ private:
 	Vector2 defaultPos;
 	bool isExist;
 public:
+	bool getIsExist() { return isExist; }
 	Gold(int x, int y, std::shared_ptr<Map2> map);
 	~Gold();
 	void MoveWithPoo(float, float);

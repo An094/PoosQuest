@@ -157,7 +157,7 @@ bool Poo2::CheckCollision()
 		float distY = screenHeight/2 - posEnemy.y;
 		distX = distX > 0 ? distX : (-distX);
 		distY = distY > 0 ? distY : (-distY);
-		if (distX < 20.0f && distY < 20.0f)
+		if (distX < 22.0f && distY < 22.0f)
 		{
 			m_poo = vPose[4];
 
@@ -175,7 +175,7 @@ bool Poo2::CheckEatGold()
 		float distY = screenHeight / 2 - posGold.y;
 		distX = distX > 0 ? distX : (-distX);
 		distY = distY > 0 ? distY : (-distY);
-		if (distX < 20.0f && distY < 20.0f)
+		if (distX < 20.0f && distY < 20.0f && it->getIsExist())
 		{
 			it->BeEaten();
 			return true;
@@ -190,7 +190,7 @@ bool Poo2::CheckEndPoint()
 	float distY = screenHeight / 2 - endPoint.y;
 	distX = distX > 0 ? distX : (-distX);
 	distY = distY > 0 ? distY : (-distY);
-	if (distX < 10.0f && distY < 10.0f)
+	if (distX < 20.0f && distY < 20.0f)
 	{
 		return true;
 	}
