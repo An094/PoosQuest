@@ -2,6 +2,7 @@
 #include"Map2.h"
 Gold::Gold(int x, int y, std::shared_ptr<Map2> map)
 {
+	isExist = true;
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
 	auto shader = ResourceManagers::GetInstance()->GetShader("Animation");
 	auto texture = ResourceManagers::GetInstance()->GetTexture("gold");
@@ -25,6 +26,12 @@ void Gold::MoveWithPoo(float x, float y)
 void Gold::BackDefault()
 {
 	m_Gold->Set2DPosition(defaultPos);
+	m_Gold->SetTexture(ResourceManagers::GetInstance()->GetTexture("gold"));
+	isExist = true;
+}
+void Gold::BeEaten()
+{
+	isExist = false;
 }
 void Gold::Draw()
 {
@@ -33,4 +40,8 @@ void Gold::Draw()
 void Gold::Update(float deltaTime)
 {
 	m_Gold->Update(deltaTime);
+	if (!isExist)
+	{
+		m_Gold->SetTexture(ResourceManagers::GetInstance()->GetTexture("blank"));
+	}
 }

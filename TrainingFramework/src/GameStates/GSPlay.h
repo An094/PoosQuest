@@ -39,7 +39,9 @@ public:
 private:
 
 	std::shared_ptr<Sprite2D> m_BackGround;
+	bool isStart;
 	bool isLost;
+	int RemGold;
 	float m_time;
 	
 	std::list<std::shared_ptr<GameButton>>	m_listButton;

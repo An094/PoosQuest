@@ -33,6 +33,8 @@ private:
 	int numEnemy;
 	int numGold;
 	int maxX, maxY;
+	Vector2 endPoint;
+	Vector2 defaultEndPoint;
 	std::vector<std::shared_ptr<Sprite2D>> m_listTileMap;
 	std::vector<Vector2> defaultPos;
 	std::list<std::shared_ptr<sEnemyData>> m_listEnemy;
@@ -52,6 +54,7 @@ public:
 	std::list<std::shared_ptr<sEnemyData>> getListEnemyData() { return m_listEnemy; }
 	std::list<std::shared_ptr<sCoor>> getGold(){ return m_Gold; }
 	Vector2 getStartPos() { return m_listTileMap[0]->Get2DPosition(); }
+	Vector2 getEndPoint() { return endPoint; }
 	int getNumEnemy() { return numEnemy; }
 	int getNumGold() { return numGold; }
 	int** getMapConvert() { return map_convert; }

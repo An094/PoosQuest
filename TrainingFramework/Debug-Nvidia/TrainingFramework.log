@@ -8,8 +8,8 @@ D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(44,34): warnin
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(54,57): warning C4244: '=': conversion from 'GLfloat' to 'int', possible loss of data
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(55,58): warning C4244: '=': conversion from 'GLfloat' to 'int', possible loss of data
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(89,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(180,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(181,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(182,11): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(183,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(210,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(211,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(212,11): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Poo2.cpp(213,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   TrainingFramework.vcxproj -> D:\20202\ThucTap\MyGame\BIN-Nvidia\TrainingFramework.exe

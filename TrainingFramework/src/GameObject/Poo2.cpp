@@ -66,10 +66,10 @@ void Poo2::HandleKeyEvents(int key, bool bIsPressed)
 void Poo2::MoveUp(float deltaTime)
 {
 	//std::cout << "x: " << getCoorPoo().x << "y: " << getCoorPoo().y << std::endl;
-	Vector2 upMove(0.0f, 1.25f);
+	Vector2 upMove(0.0f, 1.35f);
 	setDir(0);
 	m_poo = vPose[0];
-	myMap->MoveMap(0.0f, 1.25f *speed * deltaTime);
+	myMap->MoveMap(0.0f, 1.35f *speed * deltaTime);
 	for (auto it : m_listEnemy)
 	{
 		//(it)->MoveWithPoo(0.0f, 5.0f);
@@ -78,15 +78,15 @@ void Poo2::MoveUp(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(0.0f,1.25f * speed * deltaTime);
+		(it)->MoveWithPoo(0.0f,1.35f * speed * deltaTime);
 	}
 }
 void Poo2::MoveDown(float deltaTime)
 {
-	Vector2 downMove(0.0f, -1.25f);
+	Vector2 downMove(0.0f, -1.35f);
 	setDir(2);
 	m_poo = vPose[2];
-	myMap->MoveMap(0.0f, -1.25 * speed * deltaTime);
+	myMap->MoveMap(0.0f, -1.35 * speed * deltaTime);
 	for (auto it : m_listEnemy)
 	{
 		//(it)->MoveWithPoo(0.0f, -1 * speed * deltaTime);
@@ -95,15 +95,15 @@ void Poo2::MoveDown(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(0.0f, -1.25f * speed * deltaTime);
+		(it)->MoveWithPoo(0.0f, -1.35f * speed * deltaTime);
 	}
 }
 void Poo2::MoveRight(float deltaTime)
 {
-	Vector2 rightMove(-1.25f, 0.0f);
+	Vector2 rightMove(-1.35f, 0.0f);
 	setDir(1);
 	m_poo = vPose[1];
-	myMap->MoveMap(-1.25f * speed * deltaTime, 0.0f);
+	myMap->MoveMap(-1.35f * speed * deltaTime, 0.0f);
 	for (auto it : m_listEnemy)
 	{
 		//(it)->MoveWithPoo(-5.0f, 0.0f);
@@ -112,15 +112,15 @@ void Poo2::MoveRight(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(-1.25f * speed * deltaTime, 0.0f);
+		(it)->MoveWithPoo(-1.35f * speed * deltaTime, 0.0f);
 	}
 }
 void Poo2::MoveLeft(float deltaTime)
 {
-	Vector2 leftMove(1.25f, 0.0f);
+	Vector2 leftMove(1.35f, 0.0f);
 	setDir(3);
 	m_poo = vPose[3];
-	myMap->MoveMap(1.25f *speed * deltaTime, 0.0f);
+	myMap->MoveMap(1.35f *speed * deltaTime, 0.0f);
 	
 	for (auto it : m_listEnemy)
 	{
@@ -130,7 +130,7 @@ void Poo2::MoveLeft(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(1.25f *speed * deltaTime, 0.0f);
+		(it)->MoveWithPoo(1.35f *speed * deltaTime, 0.0f);
 	}
 }
 void Poo2::AutoMove(float deltaTime)
@@ -157,12 +157,42 @@ bool Poo2::CheckCollision()
 		float distY = screenHeight/2 - posEnemy.y;
 		distX = distX > 0 ? distX : (-distX);
 		distY = distY > 0 ? distY : (-distY);
-		if (distX < 15.0f && distY < 15.0f)
+		if (distX < 20.0f && distY < 20.0f)
 		{
 			m_poo = vPose[4];
 
 			return true;
 		}
+	}
+	return false;
+}
+bool Poo2::CheckEatGold()
+{
+	for (auto it : m_listGold)
+	{
+		Vector2 posGold = it->getPos();
+		float distX = screenWidth / 2 - posGold.x;
+		float distY = screenHeight / 2 - posGold.y;
+		distX = distX > 0 ? distX : (-distX);
+		distY = distY > 0 ? distY : (-distY);
+		if (distX < 20.0f && distY < 20.0f)
+		{
+			it->BeEaten();
+			return true;
+		}
+	}
+	return false;
+}
+bool Poo2::CheckEndPoint()
+{
+	Vector2 endPoint = myMap->getEndPoint();
+	float distX = screenWidth / 2 - endPoint.x;
+	float distY = screenHeight / 2 - endPoint.y;
+	distX = distX > 0 ? distX : (-distX);
+	distY = distY > 0 ? distY : (-distY);
+	if (distX < 10.0f && distY < 10.0f)
+	{
+		return true;
 	}
 	return false;
 }

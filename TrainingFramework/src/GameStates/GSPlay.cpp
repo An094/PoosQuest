@@ -27,6 +27,7 @@ GSPlay::~GSPlay()
 void GSPlay::Init()
 {
 	m_time = 0.0f;
+	isStart = true;
 	isLost = false;
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
 	auto texture = ResourceManagers::GetInstance()->GetTexture("Tile\\-1");
@@ -78,6 +79,7 @@ void GSPlay::Init()
 		auto gold = std::make_shared<Gold>(it->x, it->y, map2);
 		m_listGold.push_back(gold);
 	}
+	RemGold = m_listGold.size();
 	//Khoi tao Poo
 	m_poo2 = std::make_shared<Poo2>(map2->getPoo().dir, map2->getPoo().cDest.x, map2->getPoo().cDest.y, map2,m_listEnemy,m_listGold);
 	
@@ -148,7 +150,19 @@ void GSPlay::Update(float deltaTime)
 	{
 		isLost = true;	
 	}
-
+	if (m_poo2->CheckEatGold())
+	{
+		if (RemGold > 0)
+		{
+			RemGold = RemGold - 1;
+		}
+		
+		std::cout << "Remaining Gold: " << RemGold << std::endl;
+	}
+	if ((RemGold == 0) && (m_poo2->CheckEndPoint()))
+	{
+		std::cout << "WIN\n";
+	}
 }
 
 void GSPlay::Draw()

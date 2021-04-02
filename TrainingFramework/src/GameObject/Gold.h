@@ -6,6 +6,7 @@ class Gold
 private:
 	std::shared_ptr<SpriteAnimation2D> m_Gold;
 	Vector2 defaultPos;
+	bool isExist;
 public:
 	Gold(int x, int y, std::shared_ptr<Map2> map);
 	~Gold();
@@ -13,5 +14,6 @@ public:
 	void Draw();
 	void Update(float);
 	void BackDefault();
+	void BeEaten();
 	Vector2 getPos() { return m_Gold->Get2DPosition(); }
 };

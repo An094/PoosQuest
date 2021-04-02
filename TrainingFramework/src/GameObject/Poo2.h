@@ -35,6 +35,8 @@ public:
 	void HandleKeyEvents(int, bool);
 	void Draw();
 	bool CheckCollision();
+	bool CheckEatGold();
+	bool CheckEndPoint();
 	void BackDefault();
 	Vector2 getPos() { return m_poo->Get2DPosition(); }
 	sCoor getCoorPoo();

@@ -52,6 +52,9 @@ Map2::Map2(int level)
     struPoo.dir = readFile[index++];
     struPoo.cDest.x = readFile[index++];
     struPoo.cDest.y = readFile[index++];
+    endPoint.y = (struPoo.cDest.y - struPoo.cStart.y) * TILESIZE + screenHeight / 2;
+    endPoint.x = (struPoo.cDest.x - struPoo.cStart.x) * TILESIZE + screenWidth / 2;
+    defaultEndPoint = endPoint;
     //Lay du lieu Enemy
     numEnemy = readFile[index++];
     for (int i = 0; i < numEnemy; i++) {
@@ -133,6 +136,8 @@ void Map2::MoveMap(float x, float y)
             Vector2 currentPos = m_listTileMap[i * maxX + j]->Get2DPosition();
             m_listTileMap[i * maxX + j]->Set2DPosition(currentPos.x + x, currentPos.y + y);
         }
+    endPoint.y = endPoint.y + y;
+    endPoint.x = endPoint.x + x;
 }
 void Map2::BackDefault()
 {
@@ -140,4 +145,5 @@ void Map2::BackDefault()
         for (int j = 0; j < maxX; j++) {
             m_listTileMap[i * maxX + j]->Set2DPosition(defaultPos[i * maxX + j]);
         }
+    endPoint = defaultEndPoint;
 }
