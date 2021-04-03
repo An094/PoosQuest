@@ -18,7 +18,6 @@ public:
 	GamePlay(int);
 	~GamePlay();
 
-	void InitLevel(int);
 	void HandleKeyEvents(int key, bool bIsPressed);
 
 	void HandleTouchEvents(int x, int y, bool bIsPressed);
@@ -29,12 +28,15 @@ public:
 
 private:
 	std::shared_ptr<Sprite2D> m_BackGround;
+	std::shared_ptr<Sprite2D> Switch;
 	int m_level;
 	
 	bool isStart;
 	bool isLost;
+	bool isLoadSwitch;
 	int RemGold;
 	float m_time;
+	float m_timeLoadSwitch;
 
 	std::list<std::shared_ptr<GameButton>>	m_listButton;
 	//khai bao Map

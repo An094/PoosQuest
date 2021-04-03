@@ -22,7 +22,6 @@ public:
 	~GSPlay();
 
 	void Init();
-	void InitLevel(int);
 	void Exit();
 
 	void Pause();
@@ -40,19 +39,6 @@ public:
 	void SetNewPostionForBullet();
 private:
 	std::shared_ptr<GamePlay> m_GamePlay;
-	std::shared_ptr<Sprite2D> m_BackGround;
 	int m_level;
-	bool isWin;
-	bool isStart;
-	bool isLost;
-	int RemGold;
-	float m_time;
-	
-	std::list<std::shared_ptr<GameButton>>	m_listButton;
-	//khai bao Map
-	std::shared_ptr<Map2> map2;
-	std::list<std::shared_ptr<Gold>> m_listGold;
-	std::list<std::shared_ptr<Enemy>> m_listEnemy;
-	std::shared_ptr<Poo2> m_poo2;
 };
 
