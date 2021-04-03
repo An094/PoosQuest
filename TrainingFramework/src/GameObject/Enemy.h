@@ -18,6 +18,7 @@ public:
 	virtual void MoveWithPoo(float, float) = 0;
 	virtual void MoveDirWithPoo(float, Vector2 vector = Vector2(0.0f, 0.0f)) = 0;
 	virtual void BackDefault() = 0;
+	virtual bool getActive() = 0;
 	virtual Vector2 getPos() = 0;
 	int getDir() { return m_dir; }
 	void setDir(int dir) { m_dir = dir; }

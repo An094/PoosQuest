@@ -99,6 +99,9 @@
     <ClCompile Include="src\GameObject\GamePlay.cpp">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameObject\Enemy3.cpp">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -186,6 +189,9 @@
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="src\GameObject\GamePlay.h">
+      <Filter>TrainingFramework\src\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject\Enemy3.h">
       <Filter>TrainingFramework\src\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

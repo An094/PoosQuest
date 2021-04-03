@@ -11,6 +11,7 @@ public:
 	void MoveWithPoo(float x, float y);
 	void MoveDirWithPoo(float, Vector2);
 	void BackDefault();
+	bool getActive() { return true; }
 	Vector2 getPos() { return enemy->Get2DPosition(); }
 
 private:

@@ -157,7 +157,7 @@ bool Poo2::CheckCollision()
 		float distY = screenHeight/2 - posEnemy.y;
 		distX = distX > 0 ? distX : (-distX);
 		distY = distY > 0 ? distY : (-distY);
-		if (distX < 22.0f && distY < 22.0f)
+		if (distX < 22.0f && distY < 22.0f && it->getActive())
 		{
 			m_poo = vPose[4];
 

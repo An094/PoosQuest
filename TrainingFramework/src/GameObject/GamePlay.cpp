@@ -53,12 +53,16 @@ GamePlay::GamePlay(int level)
 		{
 		case 0:
 		{
-			printf("vao switch\n");
 			auto enemy = std::make_shared<Enemy0>(it->cEnemy.x, it->cEnemy.y, it->dir, it->move, it->maxMove1, it->speed, map2);
 			m_listEnemy.push_back(enemy);
 			break;
 		}
-
+		case 3:
+		{
+			auto enemy = std::make_shared<Enemy3>(it->cEnemy.x, it->cEnemy.y, it->dir, it->move, it->maxMove1, it->speed, map2);
+			m_listEnemy.push_back(enemy);
+			break;
+		}
 		default:
 			break;
 		}
@@ -169,13 +173,14 @@ void GamePlay::Draw()
 	map2->DrawMap();
 
 
-	for (auto obj : m_listGold)
-	{
-		obj->Draw();
-	}
 	for (auto it : m_listEnemy)
 	{
 		it->Draw();
+	}
+
+	for (auto obj : m_listGold)
+	{
+		obj->Draw();
 	}
 	m_poo2->Draw();
 	Switch->Draw();

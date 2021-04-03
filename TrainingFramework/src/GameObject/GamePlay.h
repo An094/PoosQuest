@@ -3,6 +3,7 @@
 #include "GameButton.h"
 #include "SpriteAnimation2D.h"
 #include "Enemy0.h"
+#include "Enemy3.h"
 #include "Enemy.h"
 #include "Poo2.h"
 #include "Map2.h"
