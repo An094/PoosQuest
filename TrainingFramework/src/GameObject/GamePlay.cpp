@@ -11,7 +11,7 @@
 
 extern int screenWidth; //need get on Graphic engine
 extern int screenHeight; //need get on Graphic engine
-
+int GamePlay::num_deaths = 0;
 GamePlay::GamePlay(int level)
 {
 	m_level = level;
@@ -35,14 +35,60 @@ GamePlay::GamePlay(int level)
 	m_BackGround->Set2DPosition(screenWidth / 2, screenHeight / 2);
 	m_BackGround->SetSize(screenWidth * 3, screenHeight * 3);
 
+	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\Gray");
+	Gray = std::make_shared<Sprite2D>(model, shader, texture);
+	Gray->Set2DPosition(screenWidth / 2, 50);
+	Gray->SetSize(screenWidth, 50);
+
 	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\back_play");
 	std::shared_ptr<GameButton> button = std::make_shared<GameButton>(model, shader, texture);
-	button->Set2DPosition(20, 20);
+	button->Set2DPosition(30, 50);
 	button->SetSize(40, 40);
 	button->SetOnClick([]() {
+		num_deaths = 0;
 		GameStateMachine::GetInstance()->PopState();
 		});
 	m_listButton.push_back(button);
+
+	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\Stage");
+	Stage = std::make_shared<Sprite2D>(model, shader, texture);
+	Stage->Set2DPosition(screenWidth / 4, 50);
+	Stage->SetSize(100, 25);
+
+	char s0[10];
+	char s1[10];
+	sprintf(s0, "Num\\B%d", level / 10);
+	sprintf(s1, "Num\\B%d", level % 10);
+	texture = ResourceManagers::GetInstance()->GetTexture(std::string(s0));
+	S0 = std::make_shared<Sprite2D>(model, shader, texture);
+	S0->Set2DPosition(screenWidth / 4 + 75, 50);
+	S0->SetSize(20, 25);
+
+	texture = ResourceManagers::GetInstance()->GetTexture(std::string(s1));
+	S1 = std::make_shared<Sprite2D>(model, shader, texture);
+	S1->Set2DPosition(screenWidth / 4 + 95, 50);
+	S1->SetSize(20, 25);
+
+	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\Deaths");
+	Deaths = std::make_shared<Sprite2D>(model, shader, texture);
+	Deaths->Set2DPosition(2.75f * screenWidth / 4, 50);
+	Deaths->SetSize(100, 25);
+
+	char d0[10];
+	char d1[10];
+	sprintf(d0, "Num\\B%d", num_deaths / 10);
+	sprintf(d1, "Num\\B%d", num_deaths % 10);
+
+	texture = ResourceManagers::GetInstance()->GetTexture(std::string(d0));
+	D0 = std::make_shared<Sprite2D>(model, shader, texture);
+	D0->Set2DPosition(2.75f * screenWidth / 4 + 75, 50);
+	D0->SetSize(20, 25);
+
+	texture = ResourceManagers::GetInstance()->GetTexture(std::string(d1));
+	D1 = std::make_shared<Sprite2D>(model, shader, texture);
+	D1->Set2DPosition(2.75f * screenWidth / 4 + 95, 50);
+	D1->SetSize(20, 25);
+
 
 	map2 = std::make_shared<Map2>(level);
 
@@ -130,7 +176,13 @@ void GamePlay::Update(float deltaTime)
 			m_time = 0.0f;
 			isLost = false;
 			Reset();
-
+			num_deaths++;
+			char d0[10];
+			char d1[10];
+			sprintf(d0, "Num\\B%d", num_deaths / 10);
+			sprintf(d1, "Num\\B%d", num_deaths % 10);
+			D0->SetTexture(ResourceManagers::GetInstance()->GetTexture(std::string(d0)));
+			D1->SetTexture(ResourceManagers::GetInstance()->GetTexture(std::string(d1)));
 		}
 	}
 	for (auto obj : m_listGold)
@@ -183,7 +235,15 @@ void GamePlay::Draw()
 		obj->Draw();
 	}
 	m_poo2->Draw();
+	Gray->Draw();
+	Stage->Draw();
+	S0->Draw();
+	S1->Draw();
+	Deaths->Draw();
+	D0->Draw();
+	D1->Draw();
 	Switch->Draw();
+	
 }
 
 void GamePlay::Reset()

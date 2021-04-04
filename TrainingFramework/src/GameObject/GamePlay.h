@@ -26,12 +26,18 @@ public:
 	void Draw();
 	void Reset();
 	bool isWin = false;
-
+	static int num_deaths;
 private:
 	std::shared_ptr<Sprite2D> m_BackGround;
 	std::shared_ptr<Sprite2D> Switch;
+	std::shared_ptr<Sprite2D> Gray;
+	std::shared_ptr<Sprite2D> Stage;
+	std::shared_ptr<Sprite2D> S0;
+	std::shared_ptr<Sprite2D> S1;
+	std::shared_ptr<Sprite2D> Deaths;
+	std::shared_ptr<Sprite2D> D0;
+	std::shared_ptr<Sprite2D> D1;
 	int m_level;
-	
 	bool isStart;
 	bool isLost;
 	bool isLoadSwitch;

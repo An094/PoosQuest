@@ -5,10 +5,8 @@ class Enemy0 : public Enemy {
 public:
 	Enemy0(int x, int y, int dir, int move, int maxMove, int speed, std::shared_ptr<Map2> map);
 	~Enemy0();
-	void Move(float deltaTime, float xPoo, float yPoo);
 	void Update(float);
 	void Draw();
-	void MoveWithPoo(float x, float y);
 	void MoveDirWithPoo(float, Vector2);
 	void BackDefault();
 	bool getActive() { return true; }

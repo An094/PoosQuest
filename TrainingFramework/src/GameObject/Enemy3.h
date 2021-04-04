@@ -5,10 +5,8 @@ class Enemy3 : public Enemy {
 public:
 	Enemy3(int x, int y, int dir, int move, int maxMove1, int maxMove2, std::shared_ptr<Map2> map);
 	~Enemy3();
-	void Move(float deltaTime, float xPoo, float yPoo);
 	void Update(float);
 	void Draw();
-	void MoveWithPoo(float x, float y);
 	void MoveDirWithPoo(float, Vector2);
 	void BackDefault();
 	bool getActive();
@@ -22,6 +20,7 @@ private:
 	int defaultDir;
 
 	float m_move;
+	float defaultMove;
 	float m_maxMove[2];
 
 	int status;

@@ -6,6 +6,7 @@ Enemy3::Enemy3(int x, int y, int dir, int move, int maxMove1, int maxMove2, std:
 	defaultDir = dir;
 	isChange = false;
 	m_move = move * 0.05f;
+	defaultMove = m_move;
 	m_maxMove[0] = maxMove1 * 0.05f;
 	m_maxMove[1] = maxMove2 * 0.05;
 
@@ -13,30 +14,6 @@ Enemy3::Enemy3(int x, int y, int dir, int move, int maxMove1, int maxMove2, std:
 	float xPos = (x - poo.cStart.x) * TILESIZE + screenWidth / 2;
 	float yPos = (y - poo.cStart.y) * TILESIZE + screenHeight / 2;
 	defaultPos = Vector2(xPos, yPos);
-	/*
-	* 
-	auto temSprite = std::make_shared<Sprite2D>(model, shader, texture);
-	temSprite->SetSize(28, 40);
-	temSprite->Set2DPosition(xPos, yPos);
-	vPose.push_back(temSprite);
-
-	texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy3_1");
-	temSprite = std::make_shared<Sprite2D>(model, shader, texture);
-	temSprite->SetSize(28, 40);
-	temSprite->Set2DPosition(xPos, yPos);
-
-	vPose.push_back(temSprite);
-
-	texture = ResourceManagers::GetInstance()->GetTexture("Enemy\\enemy3_2");
-	temSprite = std::make_shared<Sprite2D>(model, shader, texture);
-	temSprite->SetSize(28, 40);
-	temSprite->Set2DPosition(xPos, yPos);
-
-	vPose.push_back(temSprite);
-
-	
-	enemy = vPose[getDir()];
-	*/
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
 	std::shared_ptr<Texture> texture;
@@ -69,16 +46,7 @@ Enemy3::~Enemy3()
 {
 
 }
-void Enemy3::Move(float deltaTime, float xPoo, float yPoo)
-{
 
-	
-}
-void Enemy3::MoveWithPoo(float x, float y)
-{
-	Vector2 pos = getPos();
-	enemy->Set2DPosition(pos.x + x, pos.y + y);
-}
 void Enemy3::MoveDirWithPoo(float deltaTime, Vector2 vector)
 {
 	Vector2 pos = getPos();
@@ -88,6 +56,7 @@ void Enemy3::MoveDirWithPoo(float deltaTime, Vector2 vector)
 void Enemy3::BackDefault()
 {
 	enemy->Set2DPosition(defaultPos);
+	m_move = defaultMove;
 	setDir(defaultDir);
 	switch (defaultDir)
 	{

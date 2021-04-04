@@ -28,7 +28,7 @@ void GSPlay::Init()
 {
 	m_level = 1;
 	//InitLevel(1);
-	m_GamePlay = std::make_shared<GamePlay>(1);
+	m_GamePlay = std::make_shared<GamePlay>(m_level);
 	
 	ResourceManagers::GetInstance()->PlaySound("test.mp3");
 
