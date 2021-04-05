@@ -12,7 +12,7 @@
 
 extern int screenWidth; //need get on Graphic engine
 extern int screenHeight; //need get on Graphic engine
-
+extern bool isPlayMusic;
 GSPlay::GSPlay()
 {
 }
@@ -28,7 +28,7 @@ void GSPlay::Init()
 {
 	m_level = 1;
 	//InitLevel(1);
-	ResourceManagers::GetInstance()->PlaySound("music_game.wav", true);
+	if(isPlayMusic) ResourceManagers::GetInstance()->PlaySound("music_game.wav", true);
 	m_GamePlay = std::make_shared<GamePlay>(m_level);
 	
 	//ResourceManagers::GetInstance()->PlaySound("button-synth-pop_z1rzwdEd_WM.mp3");

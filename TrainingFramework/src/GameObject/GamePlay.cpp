@@ -116,6 +116,12 @@ GamePlay::GamePlay(int level)
 			m_listEnemy.push_back(enemy);
 			break;
 		}
+		case 2:
+		{
+			auto enemy = std::make_shared<Enemy2>(it->cEnemy.x, it->cEnemy.y, it->dir, it->move, it->maxMove1, it->maxMove2, it->speed, map2);
+			m_listEnemy.push_back(enemy);
+			break;
+		}
 		case 3:
 		{
 			auto enemy = std::make_shared<Enemy3>(it->cEnemy.x, it->cEnemy.y, it->dir, it->move, it->maxMove1, it->speed, map2);
@@ -210,7 +216,7 @@ void GamePlay::Update(float deltaTime)
 	m_poo2->Update(deltaTime);
 	if (m_poo2->CheckCollision())
 	{
-		if (!isNotiLost)
+		if (!isNotiLost && isPlaySound)
 		{
 			isNotiLost = true;
 			ResourceManagers::GetInstance()->PlaySound("kill.mp3");
@@ -220,7 +226,7 @@ void GamePlay::Update(float deltaTime)
 	}
 	if (m_poo2->CheckEatGold())
 	{
-		ResourceManagers::GetInstance()->PlaySound("coin.mp3");
+		if(isPlaySound) ResourceManagers::GetInstance()->PlaySound("coin.mp3");
 		if (RemGold > 0)
 		{
 			RemGold = RemGold - 1;

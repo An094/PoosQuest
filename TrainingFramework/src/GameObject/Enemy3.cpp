@@ -1,6 +1,6 @@
 #include "Enemy3.h"
 Enemy3::Enemy3(int x, int y, int dir, int move, int maxMove1, int maxMove2, std::shared_ptr<Map2> map)
-	: Enemy(0, x, y, dir)
+	: Enemy(3, x, y, dir)
 {
 	setDir(dir);
 	defaultDir = dir;

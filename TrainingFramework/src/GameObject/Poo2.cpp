@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "Enemy0.h"
 #include "Gold.h"
+extern bool isPlaySound;
 Poo2::Poo2(int dir, int xEnd, int yEnd,std::shared_ptr<Map2> map, std::list<std::shared_ptr<Enemy>> listEnemy, std::list<std::shared_ptr<Gold>> listGold) :DynamicObject()
 {
 	isAlive = true;
@@ -277,7 +278,7 @@ void Poo2::Move(float deltaTime)
 }
 void Poo2::soundMove(float deltaTime)
 {
-	if (MOVE) {
+	if (MOVE && isPlaySound) {
 		timeLoadSound += deltaTime;
 		if (timeLoadSound >= 0.3f)
 		{
