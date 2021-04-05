@@ -3,21 +3,21 @@
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map2.h(12,2): warning C4091: 'typedef ': ignored on left of 'sCoor' when no variable is declared
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map2.h(18,2): warning C4091: 'typedef ': ignored on left of 'sPoo' when no variable is declared
 D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\Map2.h(27,2): warning C4091: 'typedef ': ignored on left of 'sEnemyData' when no variable is declared
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(29,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(35,60): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(35,42): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(40,34): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(55,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(64,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(69,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(60,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(61,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(79,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(80,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(156,48): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(161,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(162,48): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(166,49): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(182,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(183,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(34,40): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(40,60): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(40,42): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(45,34): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(65,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(74,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(79,36): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(70,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(71,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(89,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(90,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(166,48): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(171,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(172,48): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(176,49): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(192,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\20202\ThucTap\MyGame\TrainingFramework\src\GameObject\GamePlay.cpp(193,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   TrainingFramework.vcxproj -> D:\20202\ThucTap\MyGame\BIN-Nvidia\TrainingFramework.exe

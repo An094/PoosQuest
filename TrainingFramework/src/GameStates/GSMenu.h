@@ -23,6 +23,7 @@ public:
 	void dynamicLogo(float);
 
 private:
+	bool notLoop = true;
 	float maxMove = 15.0f;
 	float speed = 25.0f;
 	float currentMove = 0.0f;

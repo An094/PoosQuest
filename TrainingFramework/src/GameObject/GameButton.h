@@ -9,7 +9,7 @@ public:
 	void	SetOnClick(void	(*pBtClick)());
 	void	HandleTouchEvents(GLint x, GLint y, bool bIsPressed);
 	bool	IsHandle();
-
+	bool	isActive;
 private:
 	void	(*m_pBtClick)();
 	bool	m_isHandle;

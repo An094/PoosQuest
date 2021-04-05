@@ -2,7 +2,9 @@
 
 extern int screenWidth; //need get on Graphic engine
 extern int screenHeight; //need get on Graphic engine
-
+extern bool isPlaySound;
+extern bool isPlayMusic;
+extern bool playingMusic;
 GSMenu::GSMenu()
 {
 	//glEnable(GL_BLEND);
@@ -19,6 +21,8 @@ GSMenu::~GSMenu()
 
 void GSMenu::Init()
 {
+	ResourceManagers::GetInstance()->PlaySound("menu.mp3",  true);
+	playingMusic = true;
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
 	auto texture = ResourceManagers::GetInstance()->GetTexture("background");
 
@@ -40,6 +44,7 @@ void GSMenu::Init()
 	buttonPlay->Set2DPosition(screenWidth / 2, 370);
 	buttonPlay->SetSize(250, 100);
 	buttonPlay->SetOnClick([]() {
+		//ResourceManagers::GetInstance()->PauseSound("menu.mp3");
 		GameStateMachine::GetInstance()->ChangeState(StateTypes::STATE_Play);
 		});
 	m_listButton.push_back(buttonPlay);
@@ -79,13 +84,6 @@ void GSMenu::Init()
 		});
 	m_listButton.push_back(button);
 
-
-	//text game title
-	
-	//shader = ResourceManagers::GetInstance()->GetShader("TextShader");
-	//std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd");
-	//m_Text_gameName = std::make_shared< Text>(shader, font, "SAMPLE NAME", TEXT_COLOR::GREEN, 1.0);
-	//m_Text_gameName->Set2DPosition(Vector2(screenWidth / 2 - 80, 120));
 	
 }
 void GSMenu::dynamicLogo(float deltaTime)
@@ -150,7 +148,14 @@ void GSMenu::HandleTouchEvents(int x, int y, bool bIsPressed)
 
 void GSMenu::Update(float deltaTime)
 {
-
+	/*
+	if (isPlayMusic)
+	{
+		ResourceManagers::GetInstance()->PlaySound("menu.mp3", true);
+		isPlayMusic = false;
+	}
+	*/
+	
 	m_BackGround->Update(deltaTime);
 	for (auto it : m_listButton)
 	{

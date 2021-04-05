@@ -2,7 +2,12 @@
 
 extern int screenWidth; //need get on Graphic engine
 extern int screenHeight; //need get on Graphic engine
-
+bool isPlaySound = true;
+bool isPlayMusic = true;
+bool playingMusic;
+int count = 0;
+bool isSoundPress;
+bool isMusicPress;
 GSSetting::GSSetting()
 {
 
@@ -37,26 +42,30 @@ void GSSetting::Init()
 	m_listButton.push_back(button);
 
 
-	//sound button
-	texture = ResourceManagers::GetInstance()->GetTexture("sound_off");
-	std::shared_ptr<GameButton> buttonPlay = std::make_shared<GameButton>(model, shader, texture);
-	buttonPlay->Set2DPosition(350, 290);
-	buttonPlay->SetSize(60, 60);
-	//buttonPlay->SetOnClick([]() {
-	//	GameStateMachine::GetInstance()->ChangeState(StateTypes::STATE_Play);
-	//	});
-	m_listButton.push_back(buttonPlay);
 
-
-	//music button
+	//button Sound
 	texture = ResourceManagers::GetInstance()->GetTexture("sound_on");
-	std::shared_ptr<GameButton> buttonCredit = std::make_shared<GameButton>(model, shader, texture);
-	buttonCredit = std::make_shared<GameButton>(model, shader, texture);
-	buttonCredit->Set2DPosition(350, 370);
-	buttonCredit->SetSize(60, 60);
-	m_listButton.push_back(buttonCredit);
+	buttonSound = std::make_shared<GameButton>(model, shader, texture);
+	buttonSound->Set2DPosition(350, 290);
+	buttonSound->SetSize(60, 60);
+	buttonSound->SetOnClick([]() {
+		count++;
+		isSoundPress = true;
+		isPlaySound = !isPlaySound;
+	});
+	m_listButton.push_back(buttonSound);
 
-	//setting button
+	//button Music
+	texture = ResourceManagers::GetInstance()->GetTexture("sound_on");
+	buttonMusic = std::make_shared<GameButton>(model, shader, texture);
+	buttonMusic->Set2DPosition(350, 370);
+	buttonMusic->SetSize(60, 60);
+	buttonMusic->SetOnClick([]() {
+		count++;
+		isMusicPress = true;
+		isPlayMusic = !isPlayMusic;
+	});
+	m_listButton.push_back(buttonMusic);
 
 }
 
@@ -103,6 +112,37 @@ void GSSetting::Update(float deltaTime)
 	{
 		it->Update(deltaTime);
 	}
+	if ((count % 2 == 0) && isSoundPress) {
+		isPlaySound = !isPlaySound;
+		isSoundPress = false;
+	}
+	if ((count % 2 == 0) && isMusicPress) {
+		isPlayMusic = !isPlayMusic;
+		isMusicPress = false;
+	}
+	if (isPlaySound) {
+		m_listButton[1]->SetTexture(ResourceManagers::GetInstance()->GetTexture("sound_on"));
+	}
+	else {
+		m_listButton[1]->SetTexture(ResourceManagers::GetInstance()->GetTexture("sound_off"));
+	}
+	if (isPlayMusic)
+	{
+		m_listButton[2]->SetTexture(ResourceManagers::GetInstance()->GetTexture("sound_on"));
+		if (!playingMusic)
+		{
+			ResourceManagers::GetInstance()->PlaySound("menu.mp3", true);
+			playingMusic = true;
+		}
+
+	}
+	else {
+		m_listButton[2]->SetTexture(ResourceManagers::GetInstance()->GetTexture("sound_off"));
+		if (playingMusic) {
+			ResourceManagers::GetInstance()->PauseSound("menu.mp3");
+			playingMusic = false;
+		}
+	}
 }
 
 void GSSetting::Draw()
@@ -112,7 +152,5 @@ void GSSetting::Draw()
 	{
 		it->Draw();
 	}
-
-	//m_Text_gameName->Draw();
 }
 

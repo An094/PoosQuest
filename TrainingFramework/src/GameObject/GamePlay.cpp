@@ -11,9 +11,14 @@
 
 extern int screenWidth; //need get on Graphic engine
 extern int screenHeight; //need get on Graphic engine
+extern bool isPlaySound;
+extern bool isPlayMusic;
+extern bool playingMusic;
 int GamePlay::num_deaths = 0;
 GamePlay::GamePlay(int level)
 {
+	ResourceManagers::GetInstance()->PauseSound("menu.mp3");
+	playingMusic = false;
 	m_level = level;
 	m_time = 0.0f;
 	isStart = true;
@@ -46,6 +51,11 @@ GamePlay::GamePlay(int level)
 	button->SetSize(40, 40);
 	button->SetOnClick([]() {
 		num_deaths = 0;
+		if (isPlayMusic) {
+			ResourceManagers::GetInstance()->PlaySound("menu.mp3", true);
+			playingMusic = true;
+		}
+		
 		GameStateMachine::GetInstance()->PopState();
 		});
 	m_listButton.push_back(button);

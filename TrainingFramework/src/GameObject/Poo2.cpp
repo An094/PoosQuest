@@ -204,6 +204,7 @@ void Poo2::Move(float deltaTime)
 {
 	if (isAlive)
 	{
+
 		sCoor currentCoor = getCoorPoo();
 		//std::cout << "x: " << currentCoor.x << "y: " << currentCoor.y << std::endl;
 
@@ -217,7 +218,6 @@ void Poo2::Move(float deltaTime)
 		{
 		case KEY_UP:
 		{
-
 			if ((mapconvert[top][left] != 1) && (mapconvert[top][right] != 1)
 				&& (mapconvert[top][left] != 5) && (mapconvert[top][right] != 5)
 				&& (mapconvert[top][left] != 8) && (mapconvert[top][right] != 8)

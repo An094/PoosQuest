@@ -23,6 +23,10 @@ public:
 
 private:
 	std::shared_ptr<Sprite2D> m_BackGround;
-	std::list<std::shared_ptr<GameButton>>	m_listButton;
+	std::vector<std::shared_ptr<GameButton>>	m_listButton;
+	std::shared_ptr<GameButton> buttonSound;
+	std::vector<std::shared_ptr<GameButton>> m_listSound;
+	std::shared_ptr<GameButton> buttonMusic;
+	std::vector<std::shared_ptr<GameButton>> m_listMusic;
 };
 
