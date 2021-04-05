@@ -20,6 +20,7 @@ private:
 	float yColl = 8.0f;
 	float speed = 120.0f;
 	int defaultDir;
+	float timeLoadSound = 0.0f;
 public:
 	Poo2(int dir,int xEnd, int yEnd,std::shared_ptr<Map2> map, std::list<std::shared_ptr<Enemy>> listEnemy,std::list<std::shared_ptr<Gold>> listGold);
 	~Poo2();
@@ -41,4 +42,5 @@ public:
 	Vector2 getPos() { return m_poo->Get2DPosition(); }
 	sCoor getCoorPoo();
 	int MOVE;
+	void soundMove(float);
 };

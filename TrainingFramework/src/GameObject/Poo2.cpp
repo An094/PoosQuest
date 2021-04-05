@@ -213,11 +213,11 @@ void Poo2::Move(float deltaTime)
 		int top = (screenHeight / 2 - yColl + 0.75f *TILESIZE-  myMap->getStartPos().y) / TILESIZE;
 		int bottom = (screenHeight / 2 + yColl + 0.75f*TILESIZE - myMap->getStartPos().y) / TILESIZE;
 
-
 		switch (MOVE)
 		{
 		case KEY_UP:
 		{
+			soundMove(deltaTime);
 			if ((mapconvert[top][left] != 1) && (mapconvert[top][right] != 1)
 				&& (mapconvert[top][left] != 5) && (mapconvert[top][right] != 5)
 				&& (mapconvert[top][left] != 8) && (mapconvert[top][right] != 8)
@@ -229,6 +229,7 @@ void Poo2::Move(float deltaTime)
 			
 		case KEY_DOWN:
 		{
+			soundMove(deltaTime);
 			if ((mapconvert[bottom][left] != 3) && (mapconvert[bottom][right] != 3)
 				&& (mapconvert[bottom][left] != 6) && (mapconvert[bottom][right] != 6)
 				&& (mapconvert[bottom][left] != 7) && (mapconvert[bottom][right] != 7)
@@ -241,6 +242,7 @@ void Poo2::Move(float deltaTime)
 			
 		case KEY_RIGHT:
 		{
+			soundMove(deltaTime);
 			if ((mapconvert[top][right] != 2) && (mapconvert[bottom][right] != 2)
 				&& (mapconvert[top][right] != 5) && (mapconvert[bottom][right] != 5)
 				&& (mapconvert[top][right] != 6) && (mapconvert[bottom][right] != 6)
@@ -253,6 +255,7 @@ void Poo2::Move(float deltaTime)
 			
 		case KEY_LEFT:
 		{
+			soundMove(deltaTime);
 			if ((mapconvert[top][left] != 4) && (mapconvert[bottom][left] != 4)
 				&& (mapconvert[top][left] != 8) && (mapconvert[bottom][left] != 8)
 				&& (mapconvert[top][left] != 7) && (mapconvert[bottom][left] != 7)
@@ -271,6 +274,18 @@ void Poo2::Move(float deltaTime)
 
 	}
 
+}
+void Poo2::soundMove(float deltaTime)
+{
+	if (MOVE) {
+		timeLoadSound += deltaTime;
+		if (timeLoadSound >= 0.3f)
+		{
+			ResourceManagers::GetInstance()->PlaySound("move.wav");
+			timeLoadSound = 0.0f;
+		}
+
+	}
 }
 void Poo2::BackDefault()
 {

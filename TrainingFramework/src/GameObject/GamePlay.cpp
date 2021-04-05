@@ -18,6 +18,7 @@ int GamePlay::num_deaths = 0;
 GamePlay::GamePlay(int level)
 {
 	ResourceManagers::GetInstance()->PauseSound("menu.mp3");
+	
 	playingMusic = false;
 	m_level = level;
 	m_time = 0.0f;
@@ -25,6 +26,7 @@ GamePlay::GamePlay(int level)
 	isLost = false;
 	isLoadSwitch = true;
 	m_timeLoadSwitch = 0.0f;
+	isNotiLost = false;
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
 	//auto texture = ResourceManagers::GetInstance()->GetTexture("Tile\\-1");
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
@@ -52,6 +54,7 @@ GamePlay::GamePlay(int level)
 	button->SetOnClick([]() {
 		num_deaths = 0;
 		if (isPlayMusic) {
+			ResourceManagers::GetInstance()->PauseSound("music_game.wav");
 			ResourceManagers::GetInstance()->PlaySound("menu.mp3", true);
 			playingMusic = true;
 		}
@@ -185,6 +188,7 @@ void GamePlay::Update(float deltaTime)
 		{
 			m_time = 0.0f;
 			isLost = false;
+			isNotiLost = false;
 			Reset();
 			num_deaths++;
 			char d0[10];
@@ -206,16 +210,23 @@ void GamePlay::Update(float deltaTime)
 	m_poo2->Update(deltaTime);
 	if (m_poo2->CheckCollision())
 	{
+		if (!isNotiLost)
+		{
+			isNotiLost = true;
+			ResourceManagers::GetInstance()->PlaySound("kill.mp3");
+		}
+
 		isLost = true;
 	}
 	if (m_poo2->CheckEatGold())
 	{
+		ResourceManagers::GetInstance()->PlaySound("coin.mp3");
 		if (RemGold > 0)
 		{
 			RemGold = RemGold - 1;
 		}
 
-		std::cout << "Remaining Gold: " << RemGold << std::endl;
+		//std::cout << "Remaining Gold: " << RemGold << std::endl;
 	}
 	if ((RemGold == 0) && (m_poo2->CheckEndPoint()))
 	{

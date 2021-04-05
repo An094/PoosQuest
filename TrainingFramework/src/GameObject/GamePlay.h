@@ -44,6 +44,7 @@ private:
 	int RemGold;
 	float m_time;
 	float m_timeLoadSwitch;
+	bool isNotiLost;
 
 	std::list<std::shared_ptr<GameButton>>	m_listButton;
 	//khai bao Map

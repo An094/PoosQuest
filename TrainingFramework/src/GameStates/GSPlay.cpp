@@ -28,6 +28,7 @@ void GSPlay::Init()
 {
 	m_level = 1;
 	//InitLevel(1);
+	ResourceManagers::GetInstance()->PlaySound("music_game.wav", true);
 	m_GamePlay = std::make_shared<GamePlay>(m_level);
 	
 	//ResourceManagers::GetInstance()->PlaySound("button-synth-pop_z1rzwdEd_WM.mp3");
