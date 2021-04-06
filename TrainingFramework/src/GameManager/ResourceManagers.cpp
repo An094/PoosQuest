@@ -18,8 +18,8 @@ ResourceManagers::ResourceManagers()
 	m_FontPath = dataPath + "fonts\\";
 	//Sound
 	m_SoundsPath = dataPath + "Sound\\";
-	m_Soloud = std::make_shared<SoLoud::Soloud>();
-	m_Soloud->init();
+	m_Soloud = SoLoud::Soloud();
+	m_Soloud.init();
 }
 
 ResourceManagers::~ResourceManagers()
@@ -190,8 +190,8 @@ void ResourceManagers::PlaySound(const std::string& name, bool loop)
 		wave->load(wav.c_str());
 		m_MapWave.insert(std::pair<std::string, std::shared_ptr<SoLoud::Wav>>(name, wave));
 	}
-	auto h = m_Soloud->play(*wave);
-	m_Soloud->setLooping(h, loop);
+	auto h = m_Soloud.play(*wave);
+	m_Soloud.setLooping(h, loop);
 }
 void ResourceManagers::PauseSound(const std::string& name)
 {
@@ -201,5 +201,5 @@ void ResourceManagers::PauseSound(const std::string& name)
 	{
 		wave = it->second;
 	}
-	m_Soloud->stopAudioSource(*wave);
+	m_Soloud.stopAudioSource(*wave);
 }

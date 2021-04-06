@@ -14,6 +14,7 @@ extern int screenWidth; //need get on Graphic engine
 extern int screenHeight; //need get on Graphic engine
 extern bool isPlayMusic;
 extern int levelGame;
+extern int levelMax;
 GSPlay::GSPlay()
 {
 }
@@ -72,8 +73,16 @@ void GSPlay::Update(float deltaTime)
 	m_GamePlay->Update(deltaTime);
 	if (m_GamePlay->isWin)
 	{
-		m_level++;
-		m_GamePlay = std::make_shared<GamePlay>(m_level);
+		if (levelGame == levelMax)
+		{
+			GameStateMachine::GetInstance()->PopState();
+			ResourceManagers::GetInstance()->PauseSound("music_game.wav");
+		}
+		else {
+			m_level++;
+			m_GamePlay = std::make_shared<GamePlay>(m_level);
+		}
+		
 	}
 }
 void GSPlay::Draw()

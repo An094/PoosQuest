@@ -11,12 +11,13 @@ private:
 	bool isAlive;
 	std::shared_ptr<SpriteAnimation2D> m_poo;
 	std::vector<std::shared_ptr<SpriteAnimation2D>> vPose;
+	std::vector<std::shared_ptr<SpriteAnimation2D>> vPose1;
 	std::list<std::shared_ptr<Enemy>> m_listEnemy;
 	std::list<std::shared_ptr<Gold>> m_listGold;
 	std::shared_ptr<Map2> myMap;
 	int** mapconvert;
 	Vector2 dest;
-	float xColl = 14.0f;
+	float xColl = 12.0f;
 	float yColl = 8.0f;
 	float speed = 120.0f;
 	int defaultDir;

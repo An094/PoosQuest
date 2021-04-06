@@ -6,7 +6,7 @@ extern bool isPlaySound;
 extern bool isPlayMusic;
 extern bool playingMusic;
 int levelGame = 1;
-int maxLevel = 6;
+int levelMax = 6;
 int typePoo = 0;
 GSLoad::GSLoad()
 {
@@ -54,7 +54,7 @@ void GSLoad::Init()
 	AniPoo0->Set2DPosition(screenWidth / 2, 200);
 	AniPoo0->SetSize(80, 60);
 
-	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\enemy1_down");
+	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo1_down");
 	AniPoo1 = std::make_shared<SpriteAnimation2D>(model, aniShader, texture, 4, 0.1f);
 	AniPoo1->Set2DPosition(screenWidth / 2, 200);
 	AniPoo1->SetSize(60, 45);
@@ -112,7 +112,7 @@ void GSLoad::Init()
 	m_buttonLevelRight->Set2DPosition(330, 300);
 	m_buttonLevelRight->SetSize(20, 35);
 	m_buttonLevelRight->SetOnClick([]() {
-		if(levelGame < maxLevel)levelGame++;
+		if(levelGame < levelMax)levelGame++;
 		});
 	m_listButton.push_back(m_buttonLevelRight);
 

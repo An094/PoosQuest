@@ -52,6 +52,6 @@ private:
 	std::string m_FontPath;
 	std::string m_SoundsPath;//Add soundsPath
 
-	std::shared_ptr<SoLoud::Soloud> m_Soloud; //Engine core
+	SoLoud::Soloud m_Soloud; //Engine core
 
 };

@@ -18,7 +18,7 @@ GSCredit::~GSCredit()
 void GSCredit::Init()
 {
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D");
-	auto texture = ResourceManagers::GetInstance()->GetTexture("bg_play");
+	auto texture = ResourceManagers::GetInstance()->GetTexture("bg_credit");
 
 	//BackGround
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
@@ -39,9 +39,27 @@ void GSCredit::Init()
 	//Text
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd");
-	text = std::make_shared< Text>(shader, font, "NGO THAI AN", TEXT_COLOR::RED, 1.0);
-	text->Set2DPosition(Vector2(150, 100));
+	text = std::make_shared< Text>(shader, font, "Game Design: Ngo Thai An", TEXT_COLOR::RED, 1.0);
+	text->Set2DPosition(Vector2(90, 100));
 
+	text2 = std::make_shared< Text>(shader, font, "based on Game Poo's Quest", TEXT_COLOR::RED, 1.0);
+	text2->Set2DPosition(Vector2(80, 150));
+
+	text3 = std::make_shared< Text>(shader, font, "by Khanh Nguyen", TEXT_COLOR::RED, 1.0);
+	text3->Set2DPosition(Vector2(150, 200));
+
+	text4 = std::make_shared< Text>(shader, font, "Programmer: Ngo Thai An", TEXT_COLOR::RED, 1.0);
+	text4->Set2DPosition(Vector2(90, 250));
+
+
+	text5 = std::make_shared< Text>(shader, font, "Instructors:", TEXT_COLOR::RED, 1.0);
+	text5->Set2DPosition(Vector2(170, 350));
+
+	text6 = std::make_shared< Text>(shader, font, "Nguyen Huu Hoang", TEXT_COLOR::RED, 1.0);
+	text6->Set2DPosition(Vector2(135, 400));
+
+	text7 = std::make_shared< Text>(shader, font, "Hoang Manh Hung", TEXT_COLOR::RED, 1.0);
+	text7->Set2DPosition(Vector2(135, 450));
 	//
 
 }
@@ -100,5 +118,11 @@ void GSCredit::Draw()
 		it->Draw();
 	}
 	text->Draw();
+	text2->Draw();
+	text3->Draw();
+	text4->Draw();
+	text5->Draw();
+	text6->Draw();
+	text7->Draw();
 }
 

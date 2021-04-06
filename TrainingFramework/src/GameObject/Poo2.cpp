@@ -3,6 +3,7 @@
 #include "Enemy0.h"
 #include "Gold.h"
 extern bool isPlaySound;
+extern int typePoo;
 Poo2::Poo2(int dir, int xEnd, int yEnd,std::shared_ptr<Map2> map, std::list<std::shared_ptr<Enemy>> listEnemy, std::list<std::shared_ptr<Gold>> listGold) :DynamicObject()
 {
 	isAlive = true;
@@ -41,7 +42,36 @@ Poo2::Poo2(int dir, int xEnd, int yEnd,std::shared_ptr<Map2> map, std::list<std:
 	tempSprite->SetSize(60, 46);
 	vPose.push_back(tempSprite);//index 4
 
-	m_poo = vPose[getDir()];
+
+	//New character
+	
+	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo1_up");
+	tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 4, 0.1f);
+	tempSprite->SetSize(40, 30);
+	vPose1.push_back(tempSprite);//index 0
+
+	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo1_right");
+	tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 4, 0.1f);
+	tempSprite->SetSize(35, 30);
+	vPose1.push_back(tempSprite);//index 1
+
+	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo1_down");
+	tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 4, 0.1f);
+	tempSprite->SetSize(40, 30);
+	vPose1.push_back(tempSprite);//index 2
+
+	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo1_left");
+	tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 4, 0.1f);
+	tempSprite->SetSize(35, 30);
+	vPose1.push_back(tempSprite);//index 3
+
+	texture = ResourceManagers::GetInstance()->GetTexture("Poo\\poo_dead");
+	tempSprite = std::make_shared<SpriteAnimation2D>(model, shader, texture, 4, 0.1f);
+	tempSprite->SetSize(60, 46);
+	vPose1.push_back(tempSprite);//index 4
+
+	if (typePoo == 0) m_poo = vPose[getDir()];
+	else if (typePoo == 1) m_poo = vPose1[getDir()];
 	m_poo->Set2DPosition(screenWidth/2, screenHeight/2);
 }
 Poo2::~Poo2()
@@ -67,10 +97,11 @@ void Poo2::HandleKeyEvents(int key, bool bIsPressed)
 void Poo2::MoveUp(float deltaTime)
 {
 	//std::cout << "x: " << getCoorPoo().x << "y: " << getCoorPoo().y << std::endl;
-	Vector2 upMove(0.0f, 1.35f);
+	Vector2 upMove(0.0f, 1.2f);
 	setDir(0);
-	m_poo = vPose[0];
-	myMap->MoveMap(0.0f, 1.35f *speed * deltaTime);
+	if (typePoo == 0) m_poo = vPose[0];
+	else if (typePoo == 1) m_poo = vPose1[0];
+	myMap->MoveMap(0.0f, 1.2f *speed * deltaTime);
 	for (auto it : m_listEnemy)
 	{
 		//(it)->MoveWithPoo(0.0f, 5.0f);
@@ -79,15 +110,16 @@ void Poo2::MoveUp(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(0.0f,1.35f * speed * deltaTime);
+		(it)->MoveWithPoo(0.0f,1.2f * speed * deltaTime);
 	}
 }
 void Poo2::MoveDown(float deltaTime)
 {
-	Vector2 downMove(0.0f, -1.35f);
+	Vector2 downMove(0.0f, -1.2f);
 	setDir(2);
-	m_poo = vPose[2];
-	myMap->MoveMap(0.0f, -1.35 * speed * deltaTime);
+	if (typePoo == 0) m_poo = vPose[2];
+	else if (typePoo == 1) m_poo = vPose1[2];
+	myMap->MoveMap(0.0f, -1.2 * speed * deltaTime);
 	for (auto it : m_listEnemy)
 	{
 		//(it)->MoveWithPoo(0.0f, -1 * speed * deltaTime);
@@ -96,15 +128,16 @@ void Poo2::MoveDown(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(0.0f, -1.35f * speed * deltaTime);
+		(it)->MoveWithPoo(0.0f, -1.2f * speed * deltaTime);
 	}
 }
 void Poo2::MoveRight(float deltaTime)
 {
-	Vector2 rightMove(-1.35f, 0.0f);
+	Vector2 rightMove(-1.2f, 0.0f);
 	setDir(1);
-	m_poo = vPose[1];
-	myMap->MoveMap(-1.35f * speed * deltaTime, 0.0f);
+	if (typePoo == 0) m_poo = vPose[1];
+	else if (typePoo == 1) m_poo = vPose1[1];
+	myMap->MoveMap(-1.2f * speed * deltaTime, 0.0f);
 	for (auto it : m_listEnemy)
 	{
 		//(it)->MoveWithPoo(-5.0f, 0.0f);
@@ -113,15 +146,16 @@ void Poo2::MoveRight(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(-1.35f * speed * deltaTime, 0.0f);
+		(it)->MoveWithPoo(-1.2f * speed * deltaTime, 0.0f);
 	}
 }
 void Poo2::MoveLeft(float deltaTime)
 {
-	Vector2 leftMove(1.35f, 0.0f);
+	Vector2 leftMove(1.2f, 0.0f);
 	setDir(3);
-	m_poo = vPose[3];
-	myMap->MoveMap(1.35f *speed * deltaTime, 0.0f);
+	if (typePoo == 0) m_poo = vPose[3];
+	else if (typePoo == 1) m_poo = vPose1[3];
+	myMap->MoveMap(1.2f *speed * deltaTime, 0.0f);
 	
 	for (auto it : m_listEnemy)
 	{
@@ -131,7 +165,7 @@ void Poo2::MoveLeft(float deltaTime)
 	}
 	for (auto it : m_listGold)
 	{
-		(it)->MoveWithPoo(1.35f *speed * deltaTime, 0.0f);
+		(it)->MoveWithPoo(1.2f *speed * deltaTime, 0.0f);
 	}
 }
 void Poo2::AutoMove(float deltaTime)
@@ -158,7 +192,7 @@ bool Poo2::CheckCollision()
 		float distY = screenHeight/2 - posEnemy.y;
 		distX = distX > 0 ? distX : (-distX);
 		distY = distY > 0 ? distY : (-distY);
-		if (distX < 22.0f && distY < 22.0f && it->getActive())
+		if (distX < 23.0f && distY < 23.0f && it->getActive())
 		{
 			m_poo = vPose[4];
 
@@ -290,7 +324,8 @@ void Poo2::soundMove(float deltaTime)
 }
 void Poo2::BackDefault()
 {
-	m_poo = vPose[defaultDir];
+	if (typePoo == 0) m_poo = vPose[defaultDir];
+	else if (typePoo == 1) m_poo = vPose1[defaultDir];
 }
 void Poo2::Update(float deltaTime)
 {
