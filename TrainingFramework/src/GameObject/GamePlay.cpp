@@ -14,6 +14,7 @@ extern int screenHeight; //need get on Graphic engine
 extern bool isPlaySound;
 extern bool isPlayMusic;
 extern bool playingMusic;
+extern int typePoo;
 int GamePlay::num_deaths = 0;
 GamePlay::GamePlay(int level)
 {

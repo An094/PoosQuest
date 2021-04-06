@@ -13,6 +13,7 @@
 extern int screenWidth; //need get on Graphic engine
 extern int screenHeight; //need get on Graphic engine
 extern bool isPlayMusic;
+extern int levelGame;
 GSPlay::GSPlay()
 {
 }
@@ -26,7 +27,7 @@ GSPlay::~GSPlay()
 
 void GSPlay::Init()
 {
-	m_level = 1;
+	m_level = levelGame;
 	//InitLevel(1);
 	if(isPlayMusic) ResourceManagers::GetInstance()->PlaySound("music_game.wav", true);
 	m_GamePlay = std::make_shared<GamePlay>(m_level);

@@ -6,8 +6,6 @@ bool isPlaySound = true;
 bool isPlayMusic = true;
 bool playingMusic;
 int count = 0;
-bool isSoundPress;
-bool isMusicPress;
 GSSetting::GSSetting()
 {
 
@@ -49,8 +47,6 @@ void GSSetting::Init()
 	buttonSound->Set2DPosition(350, 290);
 	buttonSound->SetSize(60, 60);
 	buttonSound->SetOnClick([]() {
-		count++;
-		isSoundPress = true;
 		isPlaySound = !isPlaySound;
 	});
 	m_listButton.push_back(buttonSound);
@@ -61,8 +57,6 @@ void GSSetting::Init()
 	buttonMusic->Set2DPosition(350, 370);
 	buttonMusic->SetSize(60, 60);
 	buttonMusic->SetOnClick([]() {
-		count++;
-		isMusicPress = true;
 		isPlayMusic = !isPlayMusic;
 	});
 	m_listButton.push_back(buttonMusic);
@@ -112,14 +106,7 @@ void GSSetting::Update(float deltaTime)
 	{
 		it->Update(deltaTime);
 	}
-	if ((count % 2 == 0) && isSoundPress) {
-		isPlaySound = !isPlaySound;
-		isSoundPress = false;
-	}
-	if ((count % 2 == 0) && isMusicPress) {
-		isPlayMusic = !isPlayMusic;
-		isMusicPress = false;
-	}
+	
 	if (isPlaySound) {
 		m_listButton[1]->SetTexture(ResourceManagers::GetInstance()->GetTexture("sound_on"));
 	}

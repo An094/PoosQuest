@@ -46,7 +46,7 @@ void GSMenu::Init()
 	buttonPlay->SetOnClick([]() {
 		//ResourceManagers::GetInstance()->PauseSound("menu.mp3");
 		//ResourceManagers::GetInstance()->PlaySound("growing_on_me.mp3", true);
-		GameStateMachine::GetInstance()->ChangeState(StateTypes::STATE_Play);
+		GameStateMachine::GetInstance()->ChangeState(StateTypes::STATE_Load);
 		
 		});
 	m_listButton.push_back(buttonPlay);

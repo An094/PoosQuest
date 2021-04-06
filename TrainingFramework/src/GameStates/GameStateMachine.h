@@ -9,6 +9,7 @@ enum StateTypes
 {
 	STATE_INVALID = 0,
 	STATE_Intro,
+	STATE_Load,
 	STATE_Menu,
 	STATE_Play,
 	STATE_Setting,
