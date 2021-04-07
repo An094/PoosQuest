@@ -46,8 +46,10 @@ private:
 	float m_time;
 	float m_timeLoadSwitch;
 	bool isNotiLost;
-
-	std::list<std::shared_ptr<GameButton>>	m_listButton;
+	std::shared_ptr<GameButton> buttonPause;
+	std::shared_ptr<GameButton> buttonPause1;
+	std::shared_ptr<GameButton> buttonPause2;
+	std::vector<std::shared_ptr<GameButton>>	m_listButton;
 	//khai bao Map
 	std::shared_ptr<Map2> map2;
 	std::list<std::shared_ptr<Gold>> m_listGold;

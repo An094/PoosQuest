@@ -39,8 +39,8 @@ void GSCredit::Init()
 	//Text
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd");
-	text = std::make_shared< Text>(shader, font, "Game Design: Ngo Thai An", TEXT_COLOR::RED, 1.0);
-	text->Set2DPosition(Vector2(90, 100));
+	text = std::make_shared< Text>(shader, font, "Game Designer: Ngo Thai An", TEXT_COLOR::RED, 1.0);
+	text->Set2DPosition(Vector2(80, 100));
 
 	text2 = std::make_shared< Text>(shader, font, "based on Game Poo's Quest", TEXT_COLOR::RED, 1.0);
 	text2->Set2DPosition(Vector2(80, 150));

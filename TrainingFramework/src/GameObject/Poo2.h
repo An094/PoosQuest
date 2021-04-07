@@ -17,8 +17,8 @@ private:
 	std::shared_ptr<Map2> myMap;
 	int** mapconvert;
 	Vector2 dest;
-	float xColl = 12.0f;
-	float yColl = 8.0f;
+	float xColl = 14.0f;
+	float yColl = 9.0f;
 	float speed = 120.0f;
 	int defaultDir;
 	float timeLoadSound = 0.0f;

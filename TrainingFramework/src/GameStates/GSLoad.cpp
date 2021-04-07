@@ -6,7 +6,7 @@ extern bool isPlaySound;
 extern bool isPlayMusic;
 extern bool playingMusic;
 int levelGame = 1;
-int levelMax = 6;
+int levelMax = 8;
 int typePoo = 0;
 GSLoad::GSLoad()
 {

@@ -189,7 +189,7 @@ bool Poo2::CheckCollision()
 	{
 		Vector2 posEnemy = it->getPos();
 		float distX = screenWidth/2 - posEnemy.x;
-		float distY = screenHeight/2 - posEnemy.y;
+		float distY = screenHeight/2 + 5.0f- posEnemy.y;
 		distX = distX > 0 ? distX : (-distX);
 		distY = distY > 0 ? distY : (-distY);
 		if (distX < 23.0f && distY < 23.0f && it->getActive())
@@ -207,7 +207,7 @@ bool Poo2::CheckEatGold()
 	{
 		Vector2 posGold = it->getPos();
 		float distX = screenWidth / 2 - posGold.x;
-		float distY = screenHeight / 2 - posGold.y;
+		float distY = screenHeight / 2 + 5.0f- posGold.y;
 		distX = distX > 0 ? distX : (-distX);
 		distY = distY > 0 ? distY : (-distY);
 		if (distX < 20.0f && distY < 20.0f && it->getIsExist())
@@ -222,7 +222,7 @@ bool Poo2::CheckEndPoint()
 {
 	Vector2 endPoint = myMap->getEndPoint();
 	float distX = screenWidth / 2 - endPoint.x;
-	float distY = screenHeight / 2 - endPoint.y;
+	float distY = screenHeight / 2 + 5.0f- endPoint.y;
 	distX = distX > 0 ? distX : (-distX);
 	distY = distY > 0 ? distY : (-distY);
 	if (distX < 20.0f && distY < 20.0f)
@@ -245,8 +245,8 @@ void Poo2::Move(float deltaTime)
 
 		int left = (screenWidth / 2 - xColl + TILESIZE/2 - myMap->getStartPos().x) / TILESIZE;
 		int right = (screenWidth / 2 + xColl + TILESIZE/2 - myMap->getStartPos().x) / TILESIZE;
-		int top = (screenHeight / 2 - yColl + 0.75f *TILESIZE-  myMap->getStartPos().y) / TILESIZE;
-		int bottom = (screenHeight / 2 + yColl + 0.75f*TILESIZE - myMap->getStartPos().y) / TILESIZE;
+		int top = (screenHeight / 2 + 5.0f- yColl + 0.75f *TILESIZE-  myMap->getStartPos().y) / TILESIZE;
+		int bottom = (screenHeight / 2 + 5.0f + yColl + 0.75f*TILESIZE - myMap->getStartPos().y) / TILESIZE;
 
 		switch (MOVE)
 		{
@@ -258,6 +258,8 @@ void Poo2::Move(float deltaTime)
 				&& (mapconvert[top][left] != 8) && (mapconvert[top][right] != 8)
 				&& (mapconvert[top][left] != -1) && (mapconvert[top][right] != -1))
 				MoveUp(deltaTime);
+			else if((mapconvert[top][left] == 8) && (mapconvert[bottom][left] == 8)) MoveUp(deltaTime);
+			else if ((mapconvert[top][right] == 5) && (mapconvert[bottom][right] == 5)) MoveUp(deltaTime);
 			else AutoMove(deltaTime);
 			break;
 		}
@@ -270,6 +272,8 @@ void Poo2::Move(float deltaTime)
 				&& (mapconvert[bottom][left] != 7) && (mapconvert[bottom][right] != 7)
 				&& (mapconvert[bottom][left] != -1) && (mapconvert[bottom][right] != -1))
 				MoveDown(deltaTime);
+			else if ((mapconvert[top][right] == 6) && (mapconvert[bottom][right] == 6)) MoveDown(deltaTime);
+			else if ((mapconvert[top][left] == 7) && (mapconvert[bottom][left] == 7)) MoveDown(deltaTime);
 			else AutoMove(deltaTime);
 
 			break;
@@ -283,6 +287,8 @@ void Poo2::Move(float deltaTime)
 				&& (mapconvert[top][right] != 6) && (mapconvert[bottom][right] != 6)
 				&& (mapconvert[top][right] != -1) && (mapconvert[bottom][right] != -1))
 				MoveRight(deltaTime);
+			else if ((mapconvert[top][left] == 5) && (mapconvert[top][right] == 5)) MoveRight(deltaTime);
+			else if ((mapconvert[bottom][left] == 6) && (mapconvert[bottom][right] == 6)) MoveRight(deltaTime);
 			else AutoMove(deltaTime);
 
 			break;
@@ -296,6 +302,8 @@ void Poo2::Move(float deltaTime)
 				&& (mapconvert[top][left] != 7) && (mapconvert[bottom][left] != 7)
 				&& (mapconvert[top][left] != -1) && (mapconvert[bottom][left] != -1))
 				MoveLeft(deltaTime);
+			else if ((mapconvert[top][left] == 8) && (mapconvert[top][right] == 8)) MoveLeft(deltaTime);
+			else if ((mapconvert[bottom][left] == 7) && (mapconvert[bottom][right] == 7)) MoveLeft(deltaTime);
 			else AutoMove(deltaTime);
 			break;
 		}

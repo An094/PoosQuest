@@ -15,11 +15,12 @@ extern bool isPlaySound;
 extern bool isPlayMusic;
 extern bool playingMusic;
 extern int typePoo;
+bool isPause;
 int GamePlay::num_deaths = 0;
 GamePlay::GamePlay(int level)
 {
 	ResourceManagers::GetInstance()->PauseSound("menu.mp3");
-	
+	isPause = false;
 	playingMusic = false;
 	m_level = level;
 	m_time = 0.0f;
@@ -64,6 +65,26 @@ GamePlay::GamePlay(int level)
 		});
 	m_listButton.push_back(button);
 
+	texture = ResourceManagers::GetInstance()->GetTexture("pause");
+	buttonPause1 = std::make_shared<GameButton>(model, shader, texture);
+	buttonPause1->Set2DPosition(450, 50);
+	buttonPause1->SetSize(40, 40);
+	buttonPause1->SetOnClick([]() {
+		std::cout << "pause";
+		isPause = true;
+		});
+
+	texture = ResourceManagers::GetInstance()->GetTexture("play");
+	buttonPause2 = std::make_shared<GameButton>(model, shader, texture);
+	buttonPause2->Set2DPosition(450, 50);
+	buttonPause2->SetSize(40, 40);
+	buttonPause2->SetOnClick([]() {
+		isPause = false;
+		});
+
+
+	buttonPause = buttonPause1;
+
 	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\Stage");
 	Stage = std::make_shared<Sprite2D>(model, shader, texture);
 	Stage->Set2DPosition(screenWidth / 4, 50);
@@ -85,7 +106,7 @@ GamePlay::GamePlay(int level)
 
 	texture = ResourceManagers::GetInstance()->GetTexture("Menu\\Deaths");
 	Deaths = std::make_shared<Sprite2D>(model, shader, texture);
-	Deaths->Set2DPosition(2.75f * screenWidth / 4, 50);
+	Deaths->Set2DPosition(2.75f * screenWidth / 4 -20, 50);
 	Deaths->SetSize(100, 25);
 
 	char d0[10];
@@ -95,12 +116,12 @@ GamePlay::GamePlay(int level)
 
 	texture = ResourceManagers::GetInstance()->GetTexture(std::string(d0));
 	D0 = std::make_shared<Sprite2D>(model, shader, texture);
-	D0->Set2DPosition(2.75f * screenWidth / 4 + 75, 50);
+	D0->Set2DPosition(2.75f * screenWidth / 4 + 55, 50);
 	D0->SetSize(20, 25);
 
 	texture = ResourceManagers::GetInstance()->GetTexture(std::string(d1));
 	D1 = std::make_shared<Sprite2D>(model, shader, texture);
-	D1->Set2DPosition(2.75f * screenWidth / 4 + 95, 50);
+	D1->Set2DPosition(2.75f * screenWidth / 4 + 75, 50);
 	D1->SetSize(20, 25);
 
 
@@ -161,10 +182,16 @@ void GamePlay::HandleTouchEvents(int x, int y, bool bIsPressed)
 		(it)->HandleTouchEvents(x, y, bIsPressed);
 		if ((it)->IsHandle()) break;
 	}
+	buttonPause->HandleTouchEvents(x, y, bIsPressed);
 }
 
 void GamePlay::Update(float deltaTime)
 {
+	if (isPause) {
+		buttonPause = buttonPause2;
+		return;
+	}
+	buttonPause = buttonPause1;
 	if (isLoadSwitch)
 	{
 		float xSwitch = Switch->Get2DPosition().x;
@@ -250,6 +277,7 @@ void GamePlay::Draw()
 	{
 		it->Draw();
 	}
+	buttonPause->Draw();
 	map2->DrawMap();
 
 
